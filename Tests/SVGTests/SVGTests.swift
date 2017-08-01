@@ -6,14 +6,17 @@
 //
 //
 
-import GraphicsTools
-import GraphicsTestTools
+import DataStructures
+import Rendering
+import SVG
+import QuartzAdapter
+import GraphicsTesting
 import XCTest
 
 class SVGTests: GraphicsTestCase {
-    
+
     func testParseSVG() {
-        
+
         let testFiles = [
             "line",
             "polyline",
@@ -29,7 +32,7 @@ class SVGTests: GraphicsTestCase {
             "polybezier",
             "bbox"
         ]
-        
+
         for name in testFiles {
             do {
                 let svg = try SVG(name: name)

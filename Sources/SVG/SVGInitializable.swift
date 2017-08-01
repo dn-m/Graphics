@@ -6,12 +6,11 @@
 //
 //
 
-//import Collections
-//import Geometry
-//import Path
-//
-///// Interface for types which can be initialized with an `SVG` element
-//protocol SVGInitializable {
-//    init(svgElement: SVGElement) throws
-//}
+import DataStructures
+import Geometry
+import Path
 
+/// Interface for types which can be initialized with an `SVG` element
+protocol SVGInitializable {
+    init(svgElement: SVGElement) throws
+}

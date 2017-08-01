@@ -6,16 +6,17 @@
 //
 //
 
-//import Collections
-//import Path
-//
-//extension RenderedPath {
-//    
-//    init(svgElement: SVGElement) throws {
-//        self.init(
-//            path: try Path(svgElement: svgElement),
-//            styling: try Styling(svgElement: svgElement)
-//        )
-//    }
-//}
+import DataStructures
+import Path
+import Rendering
+
+extension RenderedPath {
+    
+    init(svgElement: SVGElement) throws {
+        self.init(
+            path: try Path(svgElement: svgElement),
+            styling: try Styling(svgElement: svgElement)
+        )
+    }
+}
 

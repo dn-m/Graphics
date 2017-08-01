@@ -6,13 +6,15 @@
 //
 //
 
-//extension Styling: SVGInitializable {
-//    
-//    init(svgElement: SVGElement) throws {
-//        self.init(
-//            fill: try Fill(svgElement: svgElement),
-//            stroke: try Stroke(svgElement: svgElement)
-//        )
-//    }
-//}
+import Rendering
+
+extension Styling: SVGInitializable {
+    
+    init(svgElement: SVGElement) throws {
+        self.init(
+            fill: try Fill(svgElement: svgElement),
+            stroke: try Stroke(svgElement: svgElement)
+        )
+    }
+}
 

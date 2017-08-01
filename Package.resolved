@@ -6,8 +6,17 @@
         "repositoryURL": "https://github.com/dn-m/Math",
         "state": {
           "branch": "master",
-          "revision": "12ea22b1c6e0e44c385331c3c44e712a97cdf6fd",
+          "revision": "178a393e367c91b978339fb2dc1df4c49953c5c2",
           "version": null
+        }
+      },
+      {
+        "package": "SWXMLHash",
+        "repositoryURL": "https://github.com/drmohundro/SWXMLHash",
+        "state": {
+          "branch": null,
+          "revision": "3959d0799b045b423680d3c99c8359b8dfe288a5",
+          "version": "4.1.1"
         }
       },
       {
