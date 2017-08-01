@@ -6,7 +6,8 @@
 //
 //
 
-import Structure
+import DataStructures
+import Restructure
 import Math
 
 /// Circular collection of `Point` values.

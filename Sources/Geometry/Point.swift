@@ -7,7 +7,7 @@
 //
 
 import Darwin
-import Structure
+import Algebra
 
 /// Representation of a point.
 public struct Point {

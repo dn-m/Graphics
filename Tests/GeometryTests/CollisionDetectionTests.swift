@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Graphics
+import Geometry
 
 class CollisionDetectionTests: XCTestCase {
 

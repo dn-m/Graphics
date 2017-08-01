@@ -1,6 +1,6 @@
 //
 //  RectangleTests.swift
-//  Graphics
+//  Geometry
 //
 //  Created by Brian Heim on 7/9/17.
 //
@@ -10,7 +10,7 @@
 import XCTest
 import Structure
 import Math
-import Graphics
+import Geometry
 
 class RectangleTests: XCTestCase {
 

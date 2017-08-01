@@ -9,7 +9,7 @@
 import XCTest
 import Structure
 import Math
-@testable import Graphics
+@testable import Geometry
 
 class PolygonTests: XCTestCase {
 

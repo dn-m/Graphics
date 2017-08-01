@@ -6,8 +6,7 @@
 //
 //
 
-import Structure
-import Math
+import Algebra
 
 /// A structure that contains the location and dimensions of a rectangle.
 ///

@@ -7,7 +7,7 @@
 //
 
 import Darwin
-import Structure
+import DataStructures
 
 /// Model of a triangle.
 public struct Triangle: ConvexPolygonProtocol {
@@ -31,7 +31,7 @@ public struct Triangle: ConvexPolygonProtocol {
     }
 
     public var crossProduct: Double {
-        return Graphics.crossProduct(vertices[0], vertices[1], vertices[2])
+        return Geometry.crossProduct(vertices[0], vertices[1], vertices[2])
     }
 
     /// Vertices contained herein.

@@ -6,7 +6,7 @@
         "repositoryURL": "/Users/BEAN/dn-m/Frameworks/Math",
         "state": {
           "branch": "master",
-          "revision": "40a7cbb8c674b3175ede471a148874cca2497694",
+          "revision": "71c0b24cf8c9475ab5beb486a360909a75c514ad",
           "version": null
         }
       },
@@ -15,7 +15,7 @@
         "repositoryURL": "/Users/BEAN/dn-m/Frameworks/Structure",
         "state": {
           "branch": "flat",
-          "revision": "9ee16ee717c99419daefc49fbf93c63fcf03f0f3",
+          "revision": "b8054997ec7ad9685db0a6754bea8149e472f60a",
           "version": null
         }
       }

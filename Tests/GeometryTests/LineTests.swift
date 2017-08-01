@@ -8,7 +8,7 @@
 
 import XCTest
 import Darwin
-import Graphics
+import Geometry
 
 class LineTests: XCTestCase {
 

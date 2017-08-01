@@ -6,8 +6,9 @@
 //
 //
 
-import Structure
-import Math
+import Restructure
+import DataStructures
+import Algebra
 
 /// Polgonal shape containing at least three vertices.
 public struct Polygon: PolygonProtocol {

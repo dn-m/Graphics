@@ -6,7 +6,7 @@
 //
 //
 
-import Structure
+import Algebra
 
 /// Model of rectangular size.
 public struct Size {

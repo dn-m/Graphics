@@ -10,7 +10,7 @@ import Structure
 import Math
 
 /// Interface for polygonal shapes.
-public protocol PolygonProtocol: Shape, CollisionDetectable {
+public protocol PolygonProtocol: Shape {
 
     // MARK: - Instance Properties
 

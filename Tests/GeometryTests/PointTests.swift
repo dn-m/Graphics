@@ -1,13 +1,13 @@
 //
 //  PointTests.swift
-//  Graphics
+//  Geometry
 //
 //  Created by James Bean on 6/9/17.
 //
 //
 
 import XCTest
-import Graphics
+import Geometry
 
 class PointTests: XCTestCase {
 
@@ -68,8 +68,8 @@ class PointTests: XCTestCase {
         let point = Point(x: 1, y: 1)
         let angle = Angle.zero
         let rotated = point.rotated(by: angle)
-        XCTAssertEqualWithAccuracy(rotated.x, point.x, accuracy: 0.0000001)
-        XCTAssertEqualWithAccuracy(rotated.y, point.y, accuracy: 0.0000001)
+        XCTAssertEqual(rotated.x, point.x, accuracy: 0.0000001)
+        XCTAssertEqual(rotated.y, point.y, accuracy: 0.0000001)
     }
 
     func testRotated90DegreesAroundOrigin() {
@@ -77,8 +77,8 @@ class PointTests: XCTestCase {
         let angle = Angle(degrees: 90)
         let rotated = point.rotated(by: angle)
         let expected = Point(x: -1, y: 1)
-        XCTAssertEqualWithAccuracy(rotated.x, expected.x, accuracy: 0.0000001)
-        XCTAssertEqualWithAccuracy(rotated.y, expected.y, accuracy: 0.0000001)
+        XCTAssertEqual(rotated.x, expected.x, accuracy: 0.0000001)
+        XCTAssertEqual(rotated.y, expected.y, accuracy: 0.0000001)
     }
 
     func testRotated90DegressAroundPoint() {
@@ -87,8 +87,8 @@ class PointTests: XCTestCase {
         let angle = Angle(degrees: 90)
         let rotated = point.rotated(by: angle, around: reference)
         let expected = Point(x: 0, y: 10)
-        XCTAssertEqualWithAccuracy(rotated.x, expected.x, accuracy: 0.0000001)
-        XCTAssertEqualWithAccuracy(rotated.y, expected.y, accuracy: 0.0000001)
+        XCTAssertEqual(rotated.x, expected.x, accuracy: 0.0000001)
+        XCTAssertEqual(rotated.y, expected.y, accuracy: 0.0000001)
     }
 
     func testReflectedOverXAxis() {
