@@ -1,14 +1,14 @@
 //
 //  QuadraticBezierCurveTests.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/8/17.
 //
 //
 
 import XCTest
-import GeometryTools
-import PathTools
+import Geometry
+import Path
 
 class QuadraticBezierCurveTests: XCTestCase {
     

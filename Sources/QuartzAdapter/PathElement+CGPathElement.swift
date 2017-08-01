@@ -1,12 +1,14 @@
 //
 //  PathElement+CGPathElement.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 1/18/17.
 //
 //
 
 import QuartzCore
+import Geometry
+import Path
 
 extension PathElement {
     

@@ -1,6 +1,6 @@
 //
 //  Path.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/10/16.
 //
@@ -34,7 +34,7 @@ public struct Path {
         return curves.map { $0.axisAlignedBoundingBox }.nonEmptySum ?? .zero
     }
     
-    internal let curves: [BezierCurve]
+    public let curves: [BezierCurve]
     
     // MARK: - Initializers
     

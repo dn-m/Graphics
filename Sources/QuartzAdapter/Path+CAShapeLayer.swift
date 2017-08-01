@@ -1,12 +1,14 @@
 //
 //  Path+CAShapeLayer.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/4/17.
 //
 //
 
 import QuartzCore
+import Path
+import Rendering
 
 extension CAShapeLayer {
     

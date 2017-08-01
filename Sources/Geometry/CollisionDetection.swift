@@ -1,6 +1,6 @@
 //
 //  CollisionDetection.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/6/17.
 //

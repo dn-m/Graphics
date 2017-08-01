@@ -1,6 +1,6 @@
 //
 //  BezierCurve.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 11/24/16.
 //
@@ -93,7 +93,7 @@ public struct BezierCurve {
         }
     }
     
-    internal let points: [Point]
+    public let points: [Point]
     
     // MARK: - Initializers
     

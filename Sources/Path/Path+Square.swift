@@ -1,6 +1,6 @@
 //
 //  Path+Square.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/13/16.
 //

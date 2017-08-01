@@ -1,12 +1,13 @@
 //
 //  Path+CGPath.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/3/17.
 //
 //
 
 import QuartzCore
+import Path
 
 extension Path {
     

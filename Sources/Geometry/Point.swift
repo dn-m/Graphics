@@ -1,6 +1,6 @@
 //
 //  Point.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 1/7/17.
 //

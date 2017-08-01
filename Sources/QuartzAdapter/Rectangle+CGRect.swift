@@ -1,12 +1,13 @@
 //
 //  Rectangle+CGRect.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/3/17.
 //
 //
 
 import QuartzCore
+import Geometry
 
 extension Rectangle {
     

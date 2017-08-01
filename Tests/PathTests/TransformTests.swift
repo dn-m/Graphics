@@ -1,14 +1,14 @@
 //
 //  TransformTests.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/3/17.
 //
 //
 
 import XCTest
-import GeometryTools
-import PathTools
+import Geometry
+import Path
 
 class TransformTests: XCTestCase {
     

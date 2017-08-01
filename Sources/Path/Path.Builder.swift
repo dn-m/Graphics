@@ -1,6 +1,6 @@
 //
 //  Path.Builder.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/11/17.
 //

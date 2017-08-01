@@ -1,6 +1,6 @@
 //
 //  PathElement.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/10/16.
 //

@@ -1,14 +1,14 @@
 //
 //  PathElementTests.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 1/18/17.
 //
 //
 
 import XCTest
-import GeometryTools
-import PathTools
+import Geometry
+import Path
 
 class PathElementTests: XCTestCase {
 

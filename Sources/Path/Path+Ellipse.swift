@@ -1,6 +1,6 @@
 //
 //  Path+Ellipse.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/11/16.
 //

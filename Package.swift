@@ -1,5 +1,4 @@
 // swift-tools-version:4.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -8,8 +7,13 @@ let package = Package(
     products: [
         .library(name: "Geometry", targets: ["Geometry"]),
         .library(name: "Path", targets: ["Path"]),
+        .library(name: "Rendering", targets: ["Rendering"]),
+        .library(name: "SVG", targets: ["SVG"]),
+        .library(name: "QuartzAdapter", targets: ["QuartzAdapter"])
     ],
     dependencies: [
+        // FIXME: Reintroduce SWXMLHash when updates for Swift 4
+        //.package(url: "../../../SWXMLHash", .branch("master")),
         .package(url: "../Math", .branch("master")),
         .package(url: "../Structure", .branch("flat"))
     ],
@@ -18,8 +22,14 @@ let package = Package(
         // Sources
         .target(name: "Geometry", dependencies: ["Math", "DataStructures"]),
         .target(name: "Path", dependencies: ["Geometry", "Math"]),
+        .target(name: "Rendering", dependencies: ["Path"]),
+        .target(name: "SVG", dependencies: ["Rendering", /*"SWXMLHash"*/]),
+        .target(name: "QuartzAdapter", dependencies: ["Rendering"]),
 
         // Tests
         .testTarget(name: "GeometryTests", dependencies: ["Geometry"]),
+        .testTarget(name: "PathTests", dependencies: ["Path"]),
+        .testTarget(name: "RenderingTests", dependencies: ["Rendering"]),
+        .testTarget(name: "QuartzAdapterTests", dependencies: ["QuartzAdapter"])
     ]
 )

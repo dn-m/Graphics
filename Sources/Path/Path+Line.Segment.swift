@@ -1,6 +1,6 @@
 //
 //  Path+Line.Segment.swift
-//  PathTools
+//  Path
 //
 //  Created by James Bean on 6/17/17.
 //

@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "SWXMLHash",
+        "repositoryURL": "/Users/BEAN/SWXMLHash",
+        "state": {
+          "branch": "master",
+          "revision": "5d4d77ed1f96f47a26227fb850a2c18fbcf09a19",
+          "version": null
+        }
+      },
+      {
         "package": "Structure",
         "repositoryURL": "/Users/BEAN/dn-m/Frameworks/Structure",
         "state": {
