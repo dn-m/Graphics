@@ -1,5 +1,5 @@
 //
-//  StyledPath+SVG.swift
+//  RenderedPath+SVG.swift
 //  Rendering
 //
 //  Created by James Bean on 6/19/17.
@@ -9,7 +9,7 @@
 //import Collections
 //import Path
 //
-//extension StyledPath {
+//extension RenderedPath {
 //    
 //    init(svgElement: SVGElement) throws {
 //        self.init(

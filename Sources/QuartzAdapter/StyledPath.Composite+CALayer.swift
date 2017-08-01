@@ -1,5 +1,5 @@
 //
-//  StyledPath.Composite+CALayer.swift
+//  RenderedPath.Composite+CALayer.swift
 //  Rendering
 //
 //  Created by James Bean on 6/19/17.
@@ -19,8 +19,8 @@ extension CALayer {
             // FIXME: Encapsulate in Item
             case .leaf(let item):
                 switch item {
-                case .path(let styledPath):
-                    let layer = CAShapeLayer(styledPath)
+                case .path(let renderedPath):
+                    let layer = CAShapeLayer(renderedPath)
                     container.addSublayer(layer)
                 case .text:
                     fatalError()

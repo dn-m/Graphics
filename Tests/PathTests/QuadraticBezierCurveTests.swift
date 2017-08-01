@@ -72,7 +72,7 @@ class QuadraticBezierCurveTests: XCTestCase {
             let ys = slopeDown.ys(x: point.x)
             
             XCTAssertEqual(ys.count, 1)
-            XCTAssertEqualWithAccuracy(ys.first!, point.y, accuracy: 0.0000001)
+            XCTAssertEqual(ys.first!, point.y, accuracy: 0.0000001)
         }
     }
     
@@ -90,7 +90,7 @@ class QuadraticBezierCurveTests: XCTestCase {
             let xs = slopeDown.xs(y: point.y)
             
             XCTAssertEqual(xs.count, 1)
-            XCTAssertEqualWithAccuracy(xs.first!, point.x, accuracy: 0.0000001)
+            XCTAssertEqual(xs.first!, point.x, accuracy: 0.0000001)
         }
     }
 }

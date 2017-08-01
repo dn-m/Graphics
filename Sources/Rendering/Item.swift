@@ -10,7 +10,7 @@ import Geometry
 
 public enum Item {
 
-    case path(StyledPath)
+    case path(RenderedPath)
     case text(Text)
 
     public var frame: Rectangle {
@@ -24,8 +24,8 @@ public enum Item {
 
     public var resizedToFitContents: Item {
         switch self {
-        case .path(let styledPath):
-            return .path(styledPath.resizedToFitContents)
+        case .path(let renderedPath):
+            return .path(renderedPath.resizedToFitContents)
         case .text:
             fatalError()
         }
@@ -33,8 +33,8 @@ public enum Item {
 
     public func translated(by point: Point) -> Item {
         switch self {
-        case .path(let styledPath):
-            return .path(styledPath.translated(by: point))
+        case .path(let renderedPath):
+            return .path(renderedPath.translated(by: point))
         case .text:
             fatalError()
         }

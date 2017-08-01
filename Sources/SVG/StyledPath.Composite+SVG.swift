@@ -1,5 +1,5 @@
 //
-//  StyledPath.Composite+SVG.swift
+//  RenderedPath.Composite+SVG.swift
 //  Rendering
 //
 //  Created by James Bean on 6/19/17.
@@ -18,24 +18,24 @@
 //    }
 //}
 //
-//// TODO: Use extension StyledPath.Composite when Swift allows it
+//// TODO: Use extension RenderedPath.Composite when Swift allows it
 //// TODO: Refactor to keep DRY.
 //extension Tree where Branch == Group, Leaf == Item {
 //    
-//    /// Creates a `StyledPath.Composite` with the given `svg`.
+//    /// Creates a `RenderedPath.Composite` with the given `svg`.
 //    public init(_ svg: SVG) {
 //        
-//        // Transform SVG structure in StyledPath.Composite
+//        // Transform SVG structure in RenderedPath.Composite
 //        let structure: Composite = .init(svg.structure)
 //
 //        // Normalize frame
-//        // TODO: Move this all to StyledPath.Composite.init
+//        // TODO: Move this all to RenderedPath.Composite.init
 //        // FIXME: Refactor incorporating text
 //        let boundingBox = structure.leaves
 //            .map { leaf -> Rectangle in
 //                switch leaf {
-//                case .path(let styledPath):
-//                    return styledPath.path.axisAlignedBoundingBox
+//                case .path(let renderedPath):
+//                    return renderedPath.path.axisAlignedBoundingBox
 //                case .text:
 //                    fatalError()
 //                }
@@ -53,20 +53,20 @@
 //        self = .branch(root, [translated])
 //    }
 //
-//    /// Creates a `StyledPath.Composite` with the given `svg`, scaled to the given `height`.
+//    /// Creates a `RenderedPath.Composite` with the given `svg`, scaled to the given `height`.
 //    public init(_ svg: SVG, height: Double) {
 //
-//        // Transform SVG structure in StyledPath.Composite
+//        // Transform SVG structure in RenderedPath.Composite
 //        let structure: Composite = .init(svg.structure)
 //
 //        // Normalize frame
-//        // TODO: Move this all to StyledPath.Composite.init
+//        // TODO: Move this all to RenderedPath.Composite.init
 //        // FIXME: Refactor incorporating text
 //        let boundingBox = structure.leaves
 //            .map { leaf -> Rectangle in
 //                switch leaf {
-//                case .path(let styledPath):
-//                    return styledPath.path.axisAlignedBoundingBox
+//                case .path(let renderedPath):
+//                    return renderedPath.path.axisAlignedBoundingBox
 //                case .text:
 //                    fatalError()
 //                }
@@ -78,8 +78,8 @@
 //
 //        let translated = structure.mapLeaves { leaf -> Item in
 //            switch leaf {
-//            case .path(let styledPath):
-//                return .path(styledPath
+//            case .path(let renderedPath):
+//                return .path(renderedPath
 //                    .translated(by: -proportion * ref)
 //                    .scaled(by: proportion))
 //            case .text:
@@ -96,20 +96,20 @@
 //        self = .branch(root, [translated])
 //    }
 //
-//    /// Creates a `StyledPath.Composite` with the given `svg`, scaled to the given `width`.
+//    /// Creates a `RenderedPath.Composite` with the given `svg`, scaled to the given `width`.
 //    public init(_ svg: SVG, width: Double) {
 //
-//        // Transform SVG structure in StyledPath.Composite
+//        // Transform SVG structure in RenderedPath.Composite
 //        let structure: Composite = .init(svg.structure)
 //
 //        // Normalize frame
-//        // TODO: Move this all to StyledPath.Composite.init
+//        // TODO: Move this all to RenderedPath.Composite.init
 //        // FIXME: Refactor incorporating text
 //        let boundingBox = structure.leaves
 //            .map { leaf -> Rectangle in
 //                switch leaf {
-//                case .path(let styledPath):
-//                    return styledPath.path.axisAlignedBoundingBox
+//                case .path(let renderedPath):
+//                    return renderedPath.path.axisAlignedBoundingBox
 //                case .text:
 //                    fatalError()
 //                }
@@ -121,8 +121,8 @@
 //
 //        let translated = structure.mapLeaves { leaf -> Item in
 //            switch leaf {
-//            case .path(let styledPath):
-//                return .path(styledPath
+//            case .path(let renderedPath):
+//                return .path(renderedPath
 //                    .translated(by: -proportion * ref)
 //                    .scaled(by: proportion))
 //            case .text:
@@ -141,8 +141,8 @@
 //
 //    internal init(_ svg: SVG.Structure) {
 //        switch svg {
-//        case .leaf(let styledPath):
-//            self = .leaf(.path(styledPath))
+//        case .leaf(let renderedPath):
+//            self = .leaf(.path(renderedPath))
 //        case .branch(let group, let trees):
 //            let group = Group(group)
 //            self = .branch(group, trees.map { .init($0) })

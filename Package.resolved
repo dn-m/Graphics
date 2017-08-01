@@ -3,28 +3,19 @@
     "pins": [
       {
         "package": "Math",
-        "repositoryURL": "/Users/BEAN/dn-m/Frameworks/Math",
+        "repositoryURL": "https://github.com/dn-m/Math",
         "state": {
           "branch": "master",
-          "revision": "71c0b24cf8c9475ab5beb486a360909a75c514ad",
-          "version": null
-        }
-      },
-      {
-        "package": "SWXMLHash",
-        "repositoryURL": "/Users/BEAN/SWXMLHash",
-        "state": {
-          "branch": "master",
-          "revision": "5d4d77ed1f96f47a26227fb850a2c18fbcf09a19",
+          "revision": "12ea22b1c6e0e44c385331c3c44e712a97cdf6fd",
           "version": null
         }
       },
       {
         "package": "Structure",
-        "repositoryURL": "/Users/BEAN/dn-m/Frameworks/Structure",
+        "repositoryURL": "https://github.com/dn-m/Structure",
         "state": {
-          "branch": "flat",
-          "revision": "b8054997ec7ad9685db0a6754bea8149e472f60a",
+          "branch": "master",
+          "revision": "7ff248ef8d5f622852b686a01a9473c1e46ff5e2",
           "version": null
         }
       }

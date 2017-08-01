@@ -1,5 +1,5 @@
 //
-//  StyledPath.swift
+//  RenderedPath.swift
 //  Rendering
 //
 //  Created by James Bean on 6/18/17.
@@ -9,7 +9,7 @@
 import Geometry
 import Path
 
-public struct StyledPath {
+public struct RenderedPath {
     
     public let frame: Rectangle
     public let path: Path
@@ -27,9 +27,9 @@ public struct StyledPath {
     }
 }
 
-extension StyledPath {
+extension RenderedPath {
 
-    public var resizedToFitContents: StyledPath {
+    public var resizedToFitContents: RenderedPath {
 
         // Get the bounding box of the path in local coordinate space
         let bbox = self.path.axisAlignedBoundingBox
@@ -40,18 +40,18 @@ extension StyledPath {
         // Adjust the position within parent coordinate space to compensate for change in path
         let frame = bbox.translated(by: self.frame.origin)
 
-        return StyledPath(
+        return RenderedPath(
             frame: frame,
             path: path,
             styling: styling
         )
     }
 
-    public func translated(by point: Point) -> StyledPath {
-        return StyledPath(frame: frame.translated(by: point), path: path, styling: styling)
+    public func translated(by point: Point) -> RenderedPath {
+        return RenderedPath(frame: frame.translated(by: point), path: path, styling: styling)
     }
 
-    public func scaled(by value: Double) -> StyledPath {
+    public func scaled(by value: Double) -> RenderedPath {
 
         let fill = styling.fill
         let stroke = styling.stroke
@@ -66,14 +66,14 @@ extension StyledPath {
 
         let newStyle = Styling(fill: fill, stroke: newStroke)
 
-        return StyledPath(frame: frame, path: path.scaled(by: value), styling: newStyle)
+        return RenderedPath(frame: frame, path: path.scaled(by: value), styling: newStyle)
     }
 }
 
-extension StyledPath: CustomStringConvertible {
+extension RenderedPath: CustomStringConvertible {
 
     public var description: String {
-        var result = "StyledPath:\n"
+        var result = "RenderedPath:\n"
         result += "Frame: \(frame)\n"
         result += "\(path)\n"
         result += "\(styling)"

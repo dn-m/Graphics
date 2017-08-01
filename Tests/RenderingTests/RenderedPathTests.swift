@@ -20,15 +20,15 @@ import Rendering
 //
 //        let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
 //        let path = Path.rectangle(x: 5, y: 5, width: 10, height: 10)
-//        let styledPath = StyledPath(frame: frame, path: path)
-//        let resized = styledPath.resizedToFitContents
+//        let renderedPath = RenderedPath(frame: frame, path: path)
+//        let resized = renderedPath.resizedToFitContents
 //
 //        // Assert logic
 //        let expected = Rectangle(x: 15, y: 15, width: 10, height: 10)
 //        XCTAssertEqual(resized.frame, expected)
 //
 //        // Check graphics
-//        let before = CAShapeLayer(styledPath)
+//        let before = CAShapeLayer(renderedPath)
 //        before.showTestBorder()
 //        render(before, name: "testResizedToFitContentsStyledPathScaleAndTranslation_before")
 //

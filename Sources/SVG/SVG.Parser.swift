@@ -70,7 +70,7 @@
 //            }
 //            
 //            func path(svgData: XMLIndexer) throws -> SVG.Structure {
-//                return .leaf(try StyledPath(svgElement: svgData.element!))
+//                return .leaf(try RenderedPath(svgElement: svgData.element!))
 //            }
 //            
 //            func traverse(_ svgData: XMLIndexer) throws -> SVG.Structure? {

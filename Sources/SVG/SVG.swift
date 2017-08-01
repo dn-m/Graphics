@@ -24,13 +24,13 @@
 //        "polygon": Polygon.self
 //    ]
 //    
-//    /// Composite structure of `SVG.Group` values containing `StyledPath` values.
-//    public typealias Structure = Tree<Group,StyledPath>
+//    /// Composite structure of `SVG.Group` values containing `RenderedPath` values.
+//    public typealias Structure = Tree<Group,RenderedPath>
 //    
 //    /// View rectangle.
 //    public let viewBox: Rectangle
 //    
-//    /// Composite structure composed of `StyledPath` values.
+//    /// Composite structure composed of `RenderedPath` values.
 //    public let structure: Structure
 //    
 //    // MARK: - Initializers

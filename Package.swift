@@ -14,8 +14,8 @@ let package = Package(
     dependencies: [
         // FIXME: Reintroduce SWXMLHash when updates for Swift 4
         //.package(url: "../../../SWXMLHash", .branch("master")),
-        .package(url: "../Math", .branch("master")),
-        .package(url: "../Structure", .branch("flat"))
+        .package(url: "https://github.com/dn-m/Math", .branch("master")),
+        .package(url: "https://github.com/dn-m/Structure", .branch("master"))
     ],
     targets: [
 

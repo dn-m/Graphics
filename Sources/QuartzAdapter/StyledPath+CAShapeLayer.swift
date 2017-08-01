@@ -1,5 +1,5 @@
 //
-//  StyledPath+CAShapeLayer.swift
+//  RenderedPath+CAShapeLayer.swift
 //  Rendering
 //
 //  Created by James Bean on 6/19/17.
@@ -11,11 +11,11 @@ import Rendering
 
 extension CAShapeLayer {
     
-    public convenience init (_ styledPath: StyledPath) {
+    public convenience init (_ renderedPath: RenderedPath) {
         
-        self.init(styledPath.path)
-        frame = CGRect(styledPath.frame)
-        let styling = styledPath.styling
+        self.init(renderedPath.path)
+        frame = CGRect(renderedPath.frame)
+        let styling = renderedPath.styling
         fillColor = styling.fill.color.cgColor
         fillRule = styling.fill.rule.cgFillRule
         strokeColor = styling.stroke.color.cgColor

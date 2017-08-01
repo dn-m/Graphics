@@ -11,13 +11,13 @@ import Geometry
 
 public typealias Composite = Tree<Group,Item>
 
-// TODO: Use extension StyledPath.Composite when Swift allows it.
+// TODO: Use extension RenderedPath.Composite when Swift allows it.
 extension Tree where Branch == Group, Leaf == Item {
 
     public var frame: Rectangle {
         switch self {
-        case .leaf(let styledPath):
-            return styledPath.frame
+        case .leaf(let renderedPath):
+            return renderedPath.frame
         case .branch(let group, _):
             return group.frame
         }
@@ -45,8 +45,8 @@ extension Tree where Branch == Group, Leaf == Item {
         // Encapsulate in Item
         case .leaf(let item):
             switch item {
-            case .path(let styledPath):
-                return styledPath.path
+            case .path(let renderedPath):
+                return renderedPath.path
                     .axisAlignedBoundingBox
                     .translated(by: -item.frame.origin)
             case .text:
@@ -61,8 +61,8 @@ extension Tree where Branch == Group, Leaf == Item {
 
     public func translated(by point: Point) -> Composite {
         switch self {
-        case let .leaf(styledPath):
-            return .leaf(styledPath.translated(by: point))
+        case let .leaf(renderedPath):
+            return .leaf(renderedPath.translated(by: point))
         case let .branch(group, trees):
             // TODO: Group.translated(by: Point)
             let group = Group(group.identifier, frame: group.frame.translated(by: point))
