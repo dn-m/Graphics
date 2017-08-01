@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Math",
+        "repositoryURL": "/Users/BEAN/dn-m/Frameworks/Math",
+        "state": {
+          "branch": "master",
+          "revision": "40a7cbb8c674b3175ede471a148874cca2497694",
+          "version": null
+        }
+      },
+      {
+        "package": "Structure",
+        "repositoryURL": "/Users/BEAN/dn-m/Frameworks/Structure",
+        "state": {
+          "branch": "flat",
+          "revision": "9ee16ee717c99419daefc49fbf93c63fcf03f0f3",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
