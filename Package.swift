@@ -9,7 +9,8 @@ let package = Package(
         .library(name: "Path", targets: ["Path"]),
         .library(name: "Rendering", targets: ["Rendering"]),
         .library(name: "SVG", targets: ["SVG"]),
-        .library(name: "QuartzAdapter", targets: ["QuartzAdapter"])
+        .library(name: "QuartzAdapter", targets: ["QuartzAdapter"]),
+        .library(name: "GraphicsTesting", targets: ["GraphicsTesting"])
     ],
     dependencies: [
         .package(url: "https://github.com/drmohundro/SWXMLHash", from: "4.1.1"),
