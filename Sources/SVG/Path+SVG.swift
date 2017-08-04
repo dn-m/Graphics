@@ -95,3 +95,7 @@ private func commandStrings(from pathString: String) -> [(String, String)] {
     return zip(commands, values).map { $0 }
 }
 
+/// - Returns: `true` if the given `array` contains the given `value`.
+private func ~= <S> (set: S, value: S.Element) -> Bool where S: SetAlgebra {
+    return set.contains(value)
+}
