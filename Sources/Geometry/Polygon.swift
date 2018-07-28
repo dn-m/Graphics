@@ -74,8 +74,8 @@ public struct Polygon: PolygonProtocol {
             #warning("VertexCollection has no `removing(at:)`, refine")
             var v = vertices
             v.remove(at: index)
-            
-            return clipEar(at: index, from: vertices, into: ears + ear)
+
+            return clipEar(at: index, from: v, into: ears + ear)
         }
 
         /// Ensure that the vertices are ordered in a counter-clockwise fasion.
