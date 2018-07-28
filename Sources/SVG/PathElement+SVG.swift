@@ -6,11 +6,9 @@
 //
 //
 
+import DataStructures
 import Geometry
 import Path
-
-// FIXME: Use PatternMatching
-import Structure
 
 enum Coordinates {
     case absolute

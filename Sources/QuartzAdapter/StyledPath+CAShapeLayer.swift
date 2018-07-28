@@ -36,40 +36,40 @@ extension CAShapeLayer {
 
 internal extension Fill.Rule {
     
-    var cgFillRule: String {
+    var cgFillRule: CAShapeLayerFillRule {
         switch self {
         case .nonZero:
-            return kCAFillRuleNonZero
+            return .nonZero
         case .evenOdd:
-            return kCAFillRuleEvenOdd
+            return .evenOdd
         }
     }
 }
 
 internal extension Stroke.Cap {
     
-    var cgCap: String {
+    var cgCap: CAShapeLayerLineCap {
         switch self {
         case .butt:
-            return kCALineCapButt
+            return .butt
         case .round:
-            return kCALineCapRound
+            return .round
         case .square:
-            return kCALineCapSquare
+            return .square
         }
     }
 }
 
 internal extension Stroke.Join {
     
-    var cgJoin: String {
+    var cgJoin: CAShapeLayerLineJoin {
         switch self {
         case .miter:
-            return kCALineJoinMiter
+            return .miter
         case .bevel:
-            return kCALineJoinBevel
+            return .bevel
         case .round:
-            return kCALineJoinRound
+            return .round
         }
     }
 }

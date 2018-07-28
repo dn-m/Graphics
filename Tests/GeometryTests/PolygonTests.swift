@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Structure
 import Math
 @testable import Geometry
 

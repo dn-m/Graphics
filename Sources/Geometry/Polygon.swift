@@ -6,8 +6,8 @@
 //
 //
 
-import Restructure
 import DataStructures
+import Algorithms
 import Algebra
 
 /// Polgonal shape containing at least three vertices.
@@ -71,7 +71,11 @@ public struct Polygon: PolygonProtocol {
             }
 
             // Snip off tip, and proceed.
-            return clipEar(at: index, from: vertices.removing(at: index), into: ears + ear)
+            #warning("VertexCollection has no `removing(at:)`, refine")
+            var v = vertices
+            v.remove(at: index)
+            
+            return clipEar(at: index, from: vertices, into: ears + ear)
         }
 
         /// Ensure that the vertices are ordered in a counter-clockwise fasion.

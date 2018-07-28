@@ -65,11 +65,11 @@ extension String {
     
     var droppingHash: String {
 
-        guard characters.first == "#" else {
+        guard first == "#" else {
             return self
         }
         
-        return String(characters.dropFirst())
+        return String(dropFirst())
     }
 }
 

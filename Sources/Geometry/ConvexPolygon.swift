@@ -6,9 +6,6 @@
 //
 //
 
-import Structure
-import Math
-
 /// Concrete ConvexPolygon.
 public struct ConvexPolygon: ConvexPolygonProtocol {
 

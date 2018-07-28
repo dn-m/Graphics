@@ -7,7 +7,6 @@
 //
 
 import Darwin
-import Structure
 import Math
 
 /// Model of line.

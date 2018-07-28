@@ -8,7 +8,6 @@
 
 
 import XCTest
-import Structure
 import Math
 import Geometry
 

@@ -6,8 +6,6 @@
 //
 //
 
-import Structure
-
 /// Things that can go wrong when creating a `PolygonProtocol`-conforming type.
 public enum PolygonError: Error {
 

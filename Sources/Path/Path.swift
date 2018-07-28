@@ -7,8 +7,7 @@
 //
 
 import Algebra
-import StructureWrapping
-import Restructure
+import DataStructures
 import Geometry
 
 public struct Path {
@@ -16,7 +15,7 @@ public struct Path {
     // MARK: - Instance Properties
     
     public var isShape: Bool {
-        return curves.all { curve in curve.order == .linear }
+        return curves.allSatisfy { curve in curve.order == .linear }
     }
     
     /// - Returns: `true` if there are no non-`.close` elements contained herein. Otherwise,
@@ -62,7 +61,7 @@ public struct Path {
                 builder.move(to: point)
                 last = point
             case .line(let point):
-                point == last ? builder.close() : builder.addLine(to: point)
+                _ = point == last ? builder.close() : builder.addLine(to: point)
             case .quadCurve(let point, let control):
                 builder.addQuadCurve(to: point, control: control)
             case .curve(let point, let control1, let control2):
@@ -79,15 +78,12 @@ public struct Path {
     
     /// - Returns: Polygonal representation of the `Path`.
     public func simplified(segmentCount: Int) -> Polygon {
-        
         let vertices = curves.map { $0.simplified(segmentCount: segmentCount) }
         let (most, last) = vertices.split(at: vertices.count - 1)!
-        let merged = most.flatMap { $0.dropLast() } + last[0]
-        
+        let merged = most.flatMap { $0.dropLast() } + last.first!
         if merged.count == 2 {
-            return Polygon(vertices: merged + merged[0])
+            return Polygon(vertices: merged + merged.first!)
         }
-        
         return Polygon(vertices: merged)
     }
 }
