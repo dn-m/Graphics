@@ -5,9 +5,27 @@
         "package": "Math",
         "repositoryURL": "https://github.com/dn-m/Math",
         "state": {
-          "branch": "master",
-          "revision": "d1284e043377c0b924cba2ffa2ab0b9aa9dd246f",
-          "version": null
+          "branch": null,
+          "revision": "cafcb08302f728712872fd9ccbe82bf274f69f13",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "PerformanceTesting",
+        "repositoryURL": "https://github.com/dn-m/PerformanceTesting",
+        "state": {
+          "branch": null,
+          "revision": "b76715a574872e29fe24f70b45f14c7e1bccf170",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "Structure",
+        "repositoryURL": "https://github.com/dn-m/Structure",
+        "state": {
+          "branch": null,
+          "revision": "0b2a60740e9718fc49ae39a907982c4ae60ca008",
+          "version": "0.5.1"
         }
       },
       {
@@ -15,17 +33,8 @@
         "repositoryURL": "https://github.com/drmohundro/SWXMLHash",
         "state": {
           "branch": null,
-          "revision": "3959d0799b045b423680d3c99c8359b8dfe288a5",
-          "version": "4.1.1"
-        }
-      },
-      {
-        "package": "Structure",
-        "repositoryURL": "https://github.com/dn-m/Structure",
-        "state": {
-          "branch": "master",
-          "revision": "81d894ed931864734c73f9507e5d2f147b40a363",
-          "version": null
+          "revision": "2211b35c2e0e8b08493f86ba52b26e530cabb751",
+          "version": "4.7.0"
         }
       }
     ]
