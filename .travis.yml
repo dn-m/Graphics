@@ -1,7 +1,7 @@
 
 os:
   - osx
-language: generic
+language: swift
 sudo: required
 dist: trusty
 osx_image: xcode9.4
@@ -10,5 +10,6 @@ install:
   - sudo installer -pkg swift-4.2-DEVELOPMENT-SNAPSHOT-2018-07-28-a-osx.pkg -target /
   - export PATH="/Library/Developer/Toolchains/swift-4.2-DEVELOPMENT-SNAPSHOT-2018-07-28-a.xctoolchain/usr/bin:$PATH"
 script:
+  - swift package update
   - swift build
   - swift test
