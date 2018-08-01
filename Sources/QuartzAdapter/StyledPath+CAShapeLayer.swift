@@ -17,11 +17,15 @@ extension CAShapeLayer {
         frame = CGRect(renderedPath.frame)
         let styling = renderedPath.styling
         fillColor = styling.fill.color.cgColor
-        fillRule = styling.fill.rule.cgFillRule
+
+        if #available(macOS 10.14, *) {
+            fillRule = styling.fill.rule.cgFillRule
+            lineCap = styling.stroke.cap.cgCap
+            lineJoin = styling.stroke.join.cgJoin
+        }
+
         strokeColor = styling.stroke.color.cgColor
-        lineCap = styling.stroke.cap.cgCap
         lineDashPattern = styling.stroke.dashes?.pattern.map { NSNumber.init(value: $0) }
-        lineJoin = styling.stroke.join.cgJoin
         lineWidth = CGFloat(styling.stroke.width)
         
         if let dashPhase = styling.stroke.dashes?.phase {
@@ -35,7 +39,8 @@ extension CAShapeLayer {
 }
 
 internal extension Fill.Rule {
-    
+
+    @available(macOS 10.14, *)
     var cgFillRule: CAShapeLayerFillRule {
         switch self {
         case .nonZero:
@@ -47,7 +52,8 @@ internal extension Fill.Rule {
 }
 
 internal extension Stroke.Cap {
-    
+
+    @available(macOS 10.14, *)
     var cgCap: CAShapeLayerLineCap {
         switch self {
         case .butt:
@@ -61,7 +67,8 @@ internal extension Stroke.Cap {
 }
 
 internal extension Stroke.Join {
-    
+
+    @available(macOS 10.14, *)
     var cgJoin: CAShapeLayerLineJoin {
         switch self {
         case .miter:
