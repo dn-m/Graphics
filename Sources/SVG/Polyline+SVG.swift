@@ -18,7 +18,7 @@ extension Polyline: SVGInitializable {
         
         let points = pointsString
             .components(separatedBy: " ").filter { $0 != "" }
-            .flatMap { Point(string: $0) }
+            .compactMap(Point.init)
         
         self.init(points)
     }
