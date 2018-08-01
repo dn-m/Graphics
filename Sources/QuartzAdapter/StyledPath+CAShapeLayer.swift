@@ -18,6 +18,7 @@ extension CAShapeLayer {
         let styling = renderedPath.styling
         fillColor = styling.fill.color.cgColor
 
+        #warning("Add availability checking for fill and stroke conversions")
 //        if #available(macOS 10.14, *) {
 //            fillRule = styling.fill.rule.cgFillRule
 //            lineCap = styling.stroke.cap.cgCap
@@ -38,6 +39,7 @@ extension CAShapeLayer {
     }
 }
 
+#warning("Reintroduce Fill.Rule -> CAShapeLayerFillRule when available")
 //internal extension Fill.Rule {
 //
 //    @available(macOS 10.14, *)
@@ -51,6 +53,8 @@ extension CAShapeLayer {
 //    }
 //}
 //
+
+#warning("Reintroduce Stroke.Cap -> CAShapeLayerLineCap when available")
 //internal extension Stroke.Cap {
 //
 //    @available(macOS 10.14, *)
@@ -66,6 +70,8 @@ extension CAShapeLayer {
 //    }
 //}
 //
+
+#warning("Reintroduce Stroke.Join -> CAShapeLayerLineJoin when available")
 //internal extension Stroke.Join {
 //
 //    @available(macOS 10.14, *)
