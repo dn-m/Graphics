@@ -20,7 +20,7 @@ extension Polygon: SVGInitializable {
         let points = pointsString
             .components(separatedBy: " ")
             .filter { $0 != "" }
-            .flatMap(Point.init)
+            .compactMap(Point.init)
         
         self.init(vertices: points)
     }
