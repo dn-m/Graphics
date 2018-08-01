@@ -52,7 +52,7 @@ public final class LayoutNode: ReferenceTreeProtocol {
     }
     
     // Frame for this `LayoutNode` stored in the layout process before being committed
-    internal lazy var frameForLayout: CGRect = { return self.frame }()
+    private lazy var frameForLayout: CGRect = { return self.frame }()
     
     // Stored positions calculated for each child `LayoutNode` before moving them
     internal var frameByChild: [LayoutNode: CGRect] = [:]
