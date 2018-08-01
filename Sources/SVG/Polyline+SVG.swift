@@ -23,4 +23,3 @@ extension Polyline: SVGInitializable {
         self.init(points)
     }
 }
-
