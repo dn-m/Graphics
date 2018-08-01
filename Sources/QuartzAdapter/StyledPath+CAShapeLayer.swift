@@ -80,4 +80,3 @@ internal extension Stroke.Join {
         }
     }
 }
-
