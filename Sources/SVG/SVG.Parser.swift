@@ -8,12 +8,10 @@
 
 import Foundation
 import SWXMLHash
+import DataStructures
 import Geometry
 import Path
 import Rendering
-
-// FIXME: Use PatternMatching
-import Structure
 
 public typealias SVGElement = SWXMLHash.XMLElement
 
@@ -66,12 +64,12 @@ extension SVG {
             
             func root(svgData: XMLIndexer) throws -> SVG.Structure {
                 let group = Group(identifier: "root")
-                return .branch(group, try svgData.children.flatMap(traverse))
+                return .branch(group, try svgData.children.compactMap(traverse))
             }
             
             func group(svgData: XMLIndexer) throws -> SVG.Structure {
                 let group = try Group(svgElement: svgData.element!)
-                return .branch(group, try svgData.children.flatMap(traverse))
+                return .branch(group, try svgData.children.compactMap(traverse))
             }
             
             func path(svgData: XMLIndexer) throws -> SVG.Structure {
@@ -132,7 +130,7 @@ extension SVG {
 
 func parse(viewBox: String) throws -> Rectangle {
     
-    let dimensions = viewBox.components(separatedBy: " ").flatMap { Double($0) }
+    let dimensions = viewBox.components(separatedBy: " ").compactMap { Double($0) }
     
     guard dimensions.count == 4 else {
         throw Rectangle.SVGError.illFormed(dimensions)

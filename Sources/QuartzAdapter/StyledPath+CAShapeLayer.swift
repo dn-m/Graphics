@@ -17,11 +17,16 @@ extension CAShapeLayer {
         frame = CGRect(renderedPath.frame)
         let styling = renderedPath.styling
         fillColor = styling.fill.color.cgColor
-        fillRule = styling.fill.rule.cgFillRule
+
+        #warning("Add availability checking for fill and stroke conversions")
+//        if #available(macOS 10.14, *) {
+//            fillRule = styling.fill.rule.cgFillRule
+//            lineCap = styling.stroke.cap.cgCap
+//            lineJoin = styling.stroke.join.cgJoin
+//        }
+
         strokeColor = styling.stroke.color.cgColor
-        lineCap = styling.stroke.cap.cgCap
         lineDashPattern = styling.stroke.dashes?.pattern.map { NSNumber.init(value: $0) }
-        lineJoin = styling.stroke.join.cgJoin
         lineWidth = CGFloat(styling.stroke.width)
         
         if let dashPhase = styling.stroke.dashes?.phase {
@@ -34,43 +39,50 @@ extension CAShapeLayer {
     }
 }
 
-internal extension Fill.Rule {
-    
-    var cgFillRule: String {
-        switch self {
-        case .nonZero:
-            return kCAFillRuleNonZero
-        case .evenOdd:
-            return kCAFillRuleEvenOdd
-        }
-    }
-}
+#warning("Reintroduce Fill.Rule -> CAShapeLayerFillRule when available")
+//internal extension Fill.Rule {
+//
+//    @available(macOS 10.14, *)
+//    var cgFillRule: CAShapeLayerFillRule {
+//        switch self {
+//        case .nonZero:
+//            return .nonZero
+//        case .evenOdd:
+//            return .evenOdd
+//        }
+//    }
+//}
+//
 
-internal extension Stroke.Cap {
-    
-    var cgCap: String {
-        switch self {
-        case .butt:
-            return kCALineCapButt
-        case .round:
-            return kCALineCapRound
-        case .square:
-            return kCALineCapSquare
-        }
-    }
-}
+#warning("Reintroduce Stroke.Cap -> CAShapeLayerLineCap when available")
+//internal extension Stroke.Cap {
+//
+//    @available(macOS 10.14, *)
+//    var cgCap: CAShapeLayerLineCap {
+//        switch self {
+//        case .butt:
+//            return .butt
+//        case .round:
+//            return .round
+//        case .square:
+//            return .square
+//        }
+//    }
+//}
+//
 
-internal extension Stroke.Join {
-    
-    var cgJoin: String {
-        switch self {
-        case .miter:
-            return kCALineJoinMiter
-        case .bevel:
-            return kCALineJoinBevel
-        case .round:
-            return kCALineJoinRound
-        }
-    }
-}
-
+#warning("Reintroduce Stroke.Join -> CAShapeLayerLineJoin when available")
+//internal extension Stroke.Join {
+//
+//    @available(macOS 10.14, *)
+//    var cgJoin: CAShapeLayerLineJoin {
+//        switch self {
+//        case .miter:
+//            return .miter
+//        case .bevel:
+//            return .bevel
+//        case .round:
+//            return .round
+//        }
+//    }
+//}

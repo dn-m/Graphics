@@ -6,8 +6,6 @@
 //
 //
 
-import Structure
-
 /// Adds semantic guarantee of convexity
 public protocol ConvexPolygonProtocol: PolygonProtocol { }
 

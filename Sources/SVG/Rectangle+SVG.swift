@@ -39,7 +39,7 @@ extension Rectangle {
     
     // In the form: x,y,width,height
     init(stringValues: [String]) throws {
-        try self.init(values: stringValues.flatMap { Double($0) })
+        try self.init(values: stringValues.compactMap { Double($0) })
     }
     
     // In the form: x,y,width,height

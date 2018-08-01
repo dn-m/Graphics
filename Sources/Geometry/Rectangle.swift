@@ -148,7 +148,7 @@ public struct Rectangle: ConvexPolygonProtocol {
             )
         }
 
-        guard polygon.angles.all(satisfy: { $0 == Angle(degrees: 90) }) else {
+        guard polygon.angles.allSatisfy({ $0 == Angle(degrees: 90) }) else {
 
             throw PolygonError.invalidVertices(
                 polygon.vertices,

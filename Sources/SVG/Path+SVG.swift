@@ -7,11 +7,9 @@
 //
 
 import Foundation
-import Restructure
+import DataStructures
 import Geometry
 import Path
-// TODO: Use PatternMatching
-import Structure
 
 extension Path: SVGInitializable {
     

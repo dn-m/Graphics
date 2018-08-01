@@ -36,6 +36,6 @@ func values(from pathValues: String) -> [Double] {
     
     result.append(cur)
     
-    return result.flatMap { Double($0) }
+    return result.compactMap { Double($0) }
 }
 

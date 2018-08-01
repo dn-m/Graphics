@@ -7,8 +7,7 @@
 //
 
 import Darwin
-import Structure
-import Restructure
+import Algorithms
 import Math
 import Geometry
 
@@ -262,11 +261,11 @@ extension BezierCurve {
         {
 
             guard points.count > 1 else {
-                return (left + points.first!, right + points.first!)
+                return (left + [points.first!], right + [points.first!])
             }
 
-            let left = left + points.first!
-            let right = right + points.last!
+            let left = left + [points.first!]
+            let right = right + [points.last!]
             let points = points.pairs.map { (a: Point, b: Point) -> Point in (1-t) * a + t * b }
             return split(points: points, at: t, into: left, and: right)
         }

@@ -16,7 +16,7 @@ extension Point {
     }
     
     init?(stringValues: [String]) {
-        self.init(values: stringValues.flatMap { Double($0) })
+        self.init(values: stringValues.compactMap { Double($0) })
     }
     
     init?(values: [Double]) {

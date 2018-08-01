@@ -16,15 +16,15 @@ import Rendering
     let scale = NSScreen.main!.backingScaleFactor
 #endif
 
-extension CATextLayer {
-    
-    public convenience init(_ text: Text) {
-        self.init()
-        frame = CGRect(text.frame)
-        string = text.value
-        font = text.font
-        fontSize = CGFloat(text.fontSize)
-        foregroundColor = text.color.cgColor
-        contentsScale = scale
-    }
-}
+//extension CATextLayer {
+//    
+//    public convenience init(_ text: Text) {
+//        self.init()
+//        frame = CGRect(text.frame)
+//        string = text.value
+//        font = text.font
+//        fontSize = CGFloat(text.fontSize)
+//        foregroundColor = text.color.cgColor
+//        contentsScale = scale
+//    }
+//}

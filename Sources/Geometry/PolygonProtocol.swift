@@ -6,7 +6,6 @@
 //
 //
 
-import Structure
 import Math
 
 /// Interface for polygonal shapes.
@@ -74,7 +73,7 @@ extension PolygonProtocol {
         return edges.lazy
 
             // All of the points of the horizontal ray eminating from the point
-            .flatMap { edge in intersection(ofHorizontalRayFrom: point, through: edge) }
+            .compactMap { edge in intersection(ofHorizontalRayFrom: point, through: edge) }
 
             // Only look at the points to the left
             .filter { $0 < point.x }
@@ -93,12 +92,12 @@ extension PolygonProtocol {
 
     /// - Returns: A `Set` of all of the y-values at the given `x`.
     public func ys(at x: Double) -> Set<Double> {
-        return Set(edges.flatMap { edge in edge.y(x: x) })
+        return Set(edges.compactMap { edge in edge.y(x: x) })
 
     }
 
     /// - Returns: A `Set` of all of the x-values at the given `y`.
     public func xs(at y: Double) -> Set<Double> {
-        return Set(edges.flatMap { edge in edge.x(y: y) })
+        return Set(edges.compactMap { edge in edge.x(y: y) })
     }
 }
