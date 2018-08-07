@@ -1,1 +1,22 @@
 theme: fullwidth
+custom_categories:
+  - name: "Curves"
+    children:
+      - "BezierCurve"
+  - name: "Path"
+    children:
+      - "Path"
+      - "PathElement"
+      - "PathRepresentable"
+  - name: "Path Building"
+    children:
+      - "AllowingAllPathElements"
+      - "AllowingBuild"
+      - "AllowingMoveTo"
+  - name: "Shapes"
+    children:
+      - "Line"
+      - "Polyline"
+      - "Rectangle"
+      - "Circle"
+      - "Ellipse"
