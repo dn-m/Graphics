@@ -64,11 +64,7 @@ public struct Color {
 extension String {
     
     var droppingHash: String {
-
-        guard first == "#" else {
-            return self
-        }
-        
+        guard first == "#" else { return self }
         return String(dropFirst())
     }
 }
