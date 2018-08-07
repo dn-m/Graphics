@@ -126,7 +126,7 @@ public struct BezierCurve {
         self.points = points
     }
     
-    // MARK: - Subscript
+    // MARK: - Subscripts
     
     /// - Returns: `Point` at the given `t` value.
     public subscript (t: Double) -> Point {
@@ -248,9 +248,6 @@ public struct BezierCurve {
     public func rotated(by angle: Angle, around reference: Point = Point()) -> BezierCurve {
         return BezierCurve(points.map { $0.rotated(by: angle, around: reference) })
     }
-}
-
-extension BezierCurve {
 
     /// - Returns: Splits an arbitrarily-highly-ordered at the given `t` value into two Bézier
     /// paths of the same order.
@@ -272,7 +269,6 @@ extension BezierCurve {
 
         return split(points: controlPoints, at: t, into: [], and: [])
     }
-
 }
 
 extension BezierCurve: Equatable { }
