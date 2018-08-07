@@ -10,7 +10,28 @@ import Geometry
 
 /// Element within a `Path`.
 public enum PathElement {
-    
+
+    // MARK: - Cases
+
+    /// Move to point.
+    case move(Point)
+
+    /// Add line to point.
+    case line(Point)
+
+    /// Add quadratic bézier curve to point, with control point.
+    case quadCurve(Point, Point)
+
+    /// Add cubic bézier curve to point, with two control points.
+    case curve(Point, Point, Point)
+
+    /// Close subpath.
+    case close
+
+    // MARK: - Instance Properties
+
+    /// - Returns: `true` if this `PathElement` represents a vertex (not a curve or close).
+    /// Otherwsie, `false`.
     public var isVertex: Bool {
         switch self {
         case .move, .line:
@@ -32,43 +53,23 @@ public enum PathElement {
         }
     }
     
-    /// Move to point.
-    case move(Point)
+    // MARK: - Instance Methods
 
-    /// Add line to point.
-    case line(Point)
-
-    /// Add quadratic bézier curve to point, with control point.
-    case quadCurve(Point, Point)
-    
-    /// Add cubic bézier curve to point, with two control points.
-    case curve(Point, Point, Point)
-    
-    /// Close subpath.
-    case close
-    
+    /// - Returns: A `PathElement` translated by the given `x` and `y` values.
     func translatedBy(x: Double, y: Double) -> PathElement {
-        
         switch self {
-            
         case .close:
             return .close
-            
         case .move(let point):
             return .move(point.translatedBy(x: x, y: y))
-            
         case .line(let point):
             return .line(point.translatedBy(x: x, y: y))
-            
         case .quadCurve(let point, let control):
-            
             return .quadCurve(
                 point.translatedBy(x: x, y: y),
                 control.translatedBy(x: x, y: y)
             )
-            
         case .curve(let point, let control1, let control2):
-            
             return .curve(
                 point.translatedBy(x: x, y: y),
                 control1.translatedBy(x: x, y: y),
@@ -81,9 +82,11 @@ public enum PathElement {
 extension PathElement: Equatable { }
 
 extension PathElement: CustomStringConvertible {
-    
+
+    // MARK: - CustomStringConvertible
+
+    /// Printable description of `PathElement`.
     public var description: String {
-        
         switch self {        
         case .move(let point):
             return "move \(point.x),\(point.y)"
