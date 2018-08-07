@@ -50,42 +50,21 @@ public struct Color {
     }
     
     public init?(hex: String, alpha: Double) {
-
         let hexString = hex.droppingHash
-        
-        guard let hex = Int(hexString, radix: 16) else {
-            return nil
-        }
-        
+        guard let hex = Int(hexString, radix: 16) else { return nil }
         self.init(hex: hex, alpha: alpha)
     }
 }
 
 extension String {
-    
     var droppingHash: String {
         guard first == "#" else { return self }
         return String(dropFirst())
     }
 }
 
-extension Color: Equatable {
-    public static func == (lhs: Color, rhs: Color) -> Bool {
-        return lhs.components == rhs.components
-    }
-}
-
-extension Color.Components: Equatable {
-    
-    public static func == (lhs: Color.Components, rhs: Color.Components) -> Bool {
-        return (
-            lhs.red == rhs.red &&
-            lhs.green == rhs.green &&
-            lhs.blue == rhs.blue &&
-            lhs.alpha == rhs.alpha
-        )
-    }
-}
+extension Color: Equatable { }
+extension Color.Components: Equatable { }
 
 extension Color {
     public static let aliceBlue = Color(hex: 0xF0F8FF, alpha: 1)
