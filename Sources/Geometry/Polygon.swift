@@ -130,15 +130,7 @@ extension Polygon: Additive {
     }
 }
 
-extension Polygon: Equatable {
-
-    // MARK: Equatable
-
-    /// - Returns: `true` if the vertices of each `Polygon` are equivalent.
-    public static func == (lhs: Polygon, rhs: Polygon) -> Bool {
-        return lhs.vertices == rhs.vertices
-    }
-}
+extension Polygon: Equatable { }
 
 extension Polygon: CustomStringConvertible {
 
