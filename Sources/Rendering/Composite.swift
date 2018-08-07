@@ -49,8 +49,6 @@ extension Tree where Branch == Group, Leaf == Item {
                 return renderedPath.path
                     .axisAlignedBoundingBox
                     .translated(by: -item.frame.origin)
-//            case .text:
-//                fatalError()
             }
 
         case let .branch(group, trees):
