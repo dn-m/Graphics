@@ -61,18 +61,4 @@ public enum Line {
     }
 }
 
-extension Line: Equatable {
-
-    public static func == (lhs: Line, rhs: Line) -> Bool {
-        switch (lhs,rhs) {
-        case let (.vertical(a), .vertical(b)):
-            return a == b
-        case let (.horizontal(a), .horizontal(b)):
-            return a == b
-        case let (.slanted(slopeA, interceptA), .slanted(slopeB, interceptB)):
-            return slopeA == slopeB && interceptA == interceptB
-        default:
-            return false
-        }
-    }
-}
+extension Line: Equatable { }
