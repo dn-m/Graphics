@@ -78,39 +78,7 @@ public enum PathElement {
     }
 }
 
-extension PathElement: Equatable {
-    
-    public static func == (lhs: PathElement, rhs: PathElement) -> Bool {
-        
-        switch (lhs, rhs) {
-            
-        case (.close, .close):
-            return true
-            
-        case let (.move(pointLHS), .move(pointRHS)):
-            return pointLHS == pointRHS
-            
-        case let (.line(pointLHS), .line(pointRHS)):
-            return pointLHS == pointRHS
-            
-        case let (.quadCurve(pointLHS, controlLHS), .quadCurve(pointRHS, controlRHS)):
-            return pointLHS == pointRHS && controlLHS == controlRHS
-            
-        case let (
-            .curve(pointLHS, control1LHS, control2LHS),
-            .curve(pointRHS, control1RHS, control2RHS)
-        ): 
-            return (
-                pointLHS == pointRHS &&
-                control1LHS == control1RHS &&
-                control2LHS == control2RHS
-            )
-            
-        default:
-            return false
-        }
-    }
-}
+extension PathElement: Equatable { }
 
 extension PathElement: CustomStringConvertible {
     
