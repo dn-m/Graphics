@@ -275,15 +275,7 @@ extension BezierCurve {
 
 }
 
-extension BezierCurve: Equatable {
-    
-    // MARK: - Equatable
-    
-    /// - Returns: `true` if both `BezierCurve` values are equivalent. Otherwise `false`.
-    public static func == (lhs: BezierCurve, rhs: BezierCurve) -> Bool {
-        return lhs.points == rhs.points
-    }
-}
+extension BezierCurve: Equatable { }
 
 /// - returns: A `Set` of 0, 1, or 2 x-intercepts for the given coefficients.
 ///

@@ -50,15 +50,7 @@ extension Size: Zero {
     }
 }
 
-extension Size: Equatable {
-
-    // MARK: - Equatable
-
-    /// - Returns: `true` if both `Size` values are equivalent. Otherwise, `false`.
-    public static func == (lhs: Size, rhs: Size) -> Bool {
-        return lhs.width == rhs.width && lhs.height == rhs.height
-    }
-}
+extension Size: Equatable { }
 
 /// - Returns: `Size` scaled by the given right-hand-side value.
 public func * (lhs: Size, rhs: Double) -> Size {

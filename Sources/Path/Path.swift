@@ -106,14 +106,7 @@ extension Path: Additive {
     }
 }
 
-extension Path: Equatable {
-    
-    // MARK: - Equatable
-    
-    public static func == (lhs: Path, rhs: Path) -> Bool {
-        return lhs.curves == rhs.curves
-    }
-}
+extension Path: Equatable { }
 
 extension Path: CustomStringConvertible {
     

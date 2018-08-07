@@ -51,22 +51,4 @@ extension Line {
     }
 }
 
-extension Line.Ray: Equatable {
-
-    public static func == (lhs: Line.Ray, rhs: Line.Ray) -> Bool {
-        switch (lhs,rhs) {
-        case let (.up(a), .up(b)):
-            return a == b
-        case let (.down(a), .down(b)):
-            return a == b
-        case let (.left(a), .left(b)):
-            return a == b
-        case let (.right(a), .right(b)):
-            return a == b
-        case let (.slanted(pointA, slopeA), .slanted(pointB, slopeB)):
-            return pointA == pointB && slopeA == slopeB
-        default:
-            return false
-        }
-    }
-}
+extension Line.Ray: Equatable { }

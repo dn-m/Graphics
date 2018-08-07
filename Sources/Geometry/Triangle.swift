@@ -85,15 +85,7 @@ public struct Triangle: ConvexPolygonProtocol {
     }
 }
 
-extension Triangle: Equatable {
-
-    // MARK: - Equatable
-
-    /// - Returns: `true` if both `Triangle` values are equivalent. Otherwise, `false`.
-    public static func == (lhs: Triangle, rhs: Triangle) -> Bool {
-        return lhs.vertices == rhs.vertices
-    }
-}
+extension Triangle: Equatable { }
 
 internal func crossProduct(_ a: Point, _ b: Point, _ c: Point) -> Double {
     return ((a.x * (c.y - b.y)) + (b.x * (a.y - c.y)) + (c.x * (b.y - a.y)))
