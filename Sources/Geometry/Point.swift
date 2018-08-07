@@ -125,24 +125,8 @@ public func / (point: Point, divisor: Double) -> Point {
     return Point(x: point.x / divisor, y: point.y / divisor)
 }
 
-extension Point: Equatable {
-
-    // MARK: - Equatable
-
-    /// - Returns `true` if both `Point` values are equivalent. Otherwise, `false`.
-    public static func == (lhs: Point, rhs: Point) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
-    }
-}
-
-extension Point: Hashable {
-
-    // MARK: - Hashable
-
-    public var hashValue: Int {
-        return "\(x)\(y)".hashValue
-    }
-}
+extension Point: Equatable { }
+extension Point: Hashable { }
 
 extension Point: CustomStringConvertible {
 
