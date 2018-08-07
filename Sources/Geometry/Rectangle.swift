@@ -222,15 +222,7 @@ extension Rectangle: AdditiveSemigroup {
     }
 }
 
-extension Rectangle: Equatable {
-
-    // MARK: - Equatable
-
-    /// - Returns: `true` if values are equivalent. Otherwise, `false`.
-    public static func == (lhs: Rectangle, rhs: Rectangle) -> Bool {
-        return lhs.origin == rhs.origin && lhs.size == rhs.size
-    }
-}
+extension Rectangle: Equatable { }
 
 extension Rectangle: CustomStringConvertible {
 
