@@ -19,7 +19,7 @@ public protocol AllowingMoveTo {
     func addCurve(_ curve: BezierCurve) -> AllowingAllPathElements
 }
 
-/// Interface exposed (along with `ExposesMoveTo`) after adding a `close()` element.
+/// Interface exposed (along with `AllowingMoveTo`) after adding a `close()` element.
 public protocol AllowingBuild {
     
     @discardableResult
