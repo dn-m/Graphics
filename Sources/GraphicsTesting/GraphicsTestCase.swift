@@ -1,3 +1,5 @@
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import XCTest
 import Rendering
 import QuartzAdapter
@@ -57,3 +59,5 @@ open class GraphicsTestCase: XCTestCase {
         #endif
     }
 }
+
+#endif
