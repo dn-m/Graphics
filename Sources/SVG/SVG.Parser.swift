@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Foundation
 import SWXMLHash
 import DataStructures
@@ -144,3 +146,4 @@ func parse(viewBox: String) throws -> Rectangle {
     )
 }
 
+#endif

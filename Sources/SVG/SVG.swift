@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Foundation
 import DataStructures
 import Geometry
@@ -55,3 +57,4 @@ public struct SVG {
     }
 }
 
+#endif

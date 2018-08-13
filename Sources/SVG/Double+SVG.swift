@@ -6,11 +6,9 @@
 //
 //
 
-import Foundation
-
 // Attribution: https://github.com/timrwood/SVGPath/blob/master/SVGPath/SVGPath.swift
 
-let numberSet = CharacterSet(charactersIn: "-.0123456789eE")
+let numberSet: Set<UnicodeScalar> = ["-",".","0","1","2","3","4","5","6","7","8","9","e","E"]
 
 func values(from pathValues: String) -> [Double] {
     
