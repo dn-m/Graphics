@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Geometry
 
 extension Ellipse: SVGInitializable {
@@ -28,3 +30,4 @@ extension Ellipse: SVGInitializable {
     }
 }
 
+#endif

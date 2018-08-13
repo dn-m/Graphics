@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import DataStructures
 import Geometry
 import Path
@@ -202,3 +204,4 @@ func smoothControlPoint(for pathElement: PathElement) -> Point? {
     }
 }
 
+#endif

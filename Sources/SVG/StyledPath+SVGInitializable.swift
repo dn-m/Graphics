@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import DataStructures
 import Path
 import Rendering
@@ -20,3 +22,4 @@ extension RenderedPath {
     }
 }
 
+#endif

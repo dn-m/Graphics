@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Rendering
 
 extension Styling: SVGInitializable {
@@ -18,3 +20,4 @@ extension Styling: SVGInitializable {
     }
 }
 
+#endif

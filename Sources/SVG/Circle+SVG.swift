@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Geometry
 
 extension Circle: SVGInitializable {
@@ -24,3 +26,4 @@ extension Circle: SVGInitializable {
     }
 }
 
+#endif

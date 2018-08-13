@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import DataStructures
 import Geometry
 import Path
@@ -93,3 +95,5 @@ private func commandStrings(from pathString: String) -> [(String, String)] {
 private func ~= <S> (set: S, value: S.Element) -> Bool where S: SetAlgebra {
     return set.contains(value)
 }
+
+#endif

@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Rendering
 
 extension Fill: SVGInitializable {
@@ -49,3 +51,4 @@ extension Fill.Rule: SVGInitializable {
     }
 }
 
+#endif

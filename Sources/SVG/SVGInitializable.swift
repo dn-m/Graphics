@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import DataStructures
 import Geometry
 import Path
@@ -14,3 +16,5 @@ import Path
 protocol SVGInitializable {
     init(svgElement: SVGElement) throws
 }
+
+#endif

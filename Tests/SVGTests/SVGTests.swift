@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import DataStructures
 import Rendering
 import SVG
@@ -61,3 +63,5 @@ class SVGTests: GraphicsTestCase {
         }
     }
 }
+
+#endif

@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Geometry
 
 extension Point {
@@ -29,3 +31,4 @@ extension Point {
     }
 }
 
+#endif

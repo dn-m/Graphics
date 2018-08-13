@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 extension SVG {
 
     public struct Group {
@@ -25,3 +27,4 @@ extension SVG.Group: SVGInitializable {
     }
 }
 
+#endif

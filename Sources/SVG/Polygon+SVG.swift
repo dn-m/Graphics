@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Geometry
 import Path
 
@@ -33,3 +35,4 @@ extension Polygon: PathRepresentable {
     }
 }
 
+#endif
