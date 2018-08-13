@@ -6,7 +6,6 @@
 //
 //
 
-import Darwin
 import Math
 
 /// Model of line.

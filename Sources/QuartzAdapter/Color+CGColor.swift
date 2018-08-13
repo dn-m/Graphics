@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import QuartzCore
 import Rendering
 
@@ -23,3 +25,5 @@ extension Color {
         )!
     }
 }
+
+#endif

@@ -6,7 +6,12 @@
 //
 //
 
-import Darwin
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin.C
+#endif
+
 import Algorithms
 import Math
 import Geometry

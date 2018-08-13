@@ -220,10 +220,10 @@ extension Color: CustomStringConvertible {
 
     public var description: String {
         var result = "("
-        result += "r: \(components.red.formatted(digits: 2)), "
-        result += "g: \(components.green.formatted(digits: 2)), "
-        result += "b: \(components.blue.formatted(digits: 2)), "
-        result += "a: \(components.alpha.formatted(digits: 2))"
+        result += "r: \(components.red), "
+        result += "g: \(components.green), "
+        result += "b: \(components.blue), "
+        result += "a: \(components.alpha)"
         result += ")"
         return result
     }

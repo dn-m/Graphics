@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import QuartzCore
 import Geometry
 
@@ -22,3 +24,5 @@ extension CGRect {
         self.init(origin: CGPoint(rectangle.origin), size: CGSize(rectangle.size))
     }
 }
+
+#endif

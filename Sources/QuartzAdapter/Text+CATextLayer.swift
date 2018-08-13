@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Rendering
 
 #if os(iOS)
@@ -28,3 +30,5 @@ import Rendering
 //        contentsScale = scale
 //    }
 //}
+
+#endif

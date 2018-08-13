@@ -76,7 +76,7 @@ extension CircularArray where Element == Point {
         let lower = halfHull(of: vertices)
 
         // Assemble the upper half of the hull (approaching the vertices from the reverse).
-        let upper = halfHull(of: vertices.reversed())
+        let upper = halfHull(of: VertexCollection(vertices.reversed()))
 
         // Chop off the last element of each, as these elements dovetail.
         let hull = lower.dropLast() + upper.dropLast()
