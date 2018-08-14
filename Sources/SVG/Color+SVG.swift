@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Rendering
 
 extension Color {
@@ -34,3 +36,4 @@ extension Color {
     }
 }
 
+#endif

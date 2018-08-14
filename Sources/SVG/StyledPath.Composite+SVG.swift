@@ -5,6 +5,7 @@
 //  Created by James Bean on 6/19/17.
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
 
 import DataStructures
 import Geometry
@@ -140,3 +141,4 @@ extension Tree where Branch == Group, Leaf == Item {
     }
 }
 
+#endif

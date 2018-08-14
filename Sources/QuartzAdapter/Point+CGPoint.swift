@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import QuartzCore
 import Geometry
 
@@ -24,3 +26,5 @@ extension CGPoint {
         self.init(x: CGFloat(point.x), y: CGFloat(point.y))
     }
 }
+
+#endif

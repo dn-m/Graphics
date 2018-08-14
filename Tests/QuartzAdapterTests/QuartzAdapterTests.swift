@@ -1,3 +1,4 @@
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
 
 import XCTest
 import QuartzCore
@@ -71,3 +72,5 @@ class PathTests: XCTest {
         XCTAssertEqual(path, Path(path.cgPath))
     }
 }
+
+#endif

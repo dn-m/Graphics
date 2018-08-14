@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Rendering
 import QuartzCore
 
@@ -29,3 +31,5 @@ extension CALayer {
         traverse(layer: self)
     }
 }
+
+#endif

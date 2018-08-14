@@ -6,7 +6,8 @@
 //
 //
 
-import Foundation
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import DataStructures
 import Geometry
 import Path
@@ -66,7 +67,7 @@ private func polybezier(svgElement: SVGElement) throws -> Path {
     return Path(pathElements: pathElements)
 }
 
-private let svgCommands = CharacterSet(charactersIn: "MmLlVvHhQqTtCcSsZz")
+private let svgCommands: Set<UnicodeScalar> = ["M","m","L","l","V","v","H","h","Q","q","T","t","C","c","S","s","Z","z"]
 
 private func commandStrings(from pathString: String) -> [(String, String)] {
 
@@ -75,8 +76,7 @@ private func commandStrings(from pathString: String) -> [(String, String)] {
     var commandStart: Int?
 
     for (s,scalar) in pathString.unicodeScalars.enumerated() {
-        switch scalar {
-        case svgCommands:
+        if svgCommands.contains(scalar) {
             commands.append(String(scalar))
             if let commandStart = commandStart {
                 // FIXME: Add tests!
@@ -85,8 +85,6 @@ private func commandStrings(from pathString: String) -> [(String, String)] {
                 values.append(String(pathString[start ..< end]))
             }
             commandStart = s + 1
-        default:
-            break
         }
     }
 
@@ -97,3 +95,5 @@ private func commandStrings(from pathString: String) -> [(String, String)] {
 private func ~= <S> (set: S, value: S.Element) -> Bool where S: SetAlgebra {
     return set.contains(value)
 }
+
+#endif

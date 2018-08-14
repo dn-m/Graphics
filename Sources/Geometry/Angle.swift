@@ -6,7 +6,11 @@
 //
 //
 
-import Darwin
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin.C
+#endif
 
 public typealias Radians = Double
 public typealias Degrees = Double

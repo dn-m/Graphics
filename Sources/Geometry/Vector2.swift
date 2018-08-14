@@ -6,7 +6,11 @@
 //
 //
 
-import Darwin
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin.C
+#endif
 
 /// Two-dimensional Vector.
 public struct Vector2 {

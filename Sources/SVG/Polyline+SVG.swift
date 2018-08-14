@@ -6,6 +6,8 @@
 //
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
+
 import Geometry
 
 extension Polyline: SVGInitializable {
@@ -23,3 +25,5 @@ extension Polyline: SVGInitializable {
         self.init(points)
     }
 }
+
+#endif
