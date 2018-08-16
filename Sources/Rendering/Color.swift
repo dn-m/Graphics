@@ -6,6 +6,8 @@
 //
 //
 
+import Math
+
 /// Structure representing a color.
 public struct Color {
 
@@ -36,10 +38,42 @@ extension Color {
     /// Create a `Color` with the given `cyan`, yellow`, `mageneta`, `black` and `alpha` values in
     /// the range [0,1].
     public init(cyan: Double, magenta: Double, yellow: Double, black: Double, alpha: Double = 1) {
-        let red = Int(255 * (1 - cyan) * (1 - black))
-        let green = Int(255 * (1 - magenta) * (1 - black))
-        let blue = Int(255 * (1 - yellow) * (1 - black))
+        let red = (1 - cyan) * (1 - black)
+        let green = (1 - magenta) * (1 - black)
+        let blue = (1 - yellow) * (1 - black)
         self.init(red: red, green: green, blue: blue)
+    }
+
+    /// Create a `Color`, with the given `hue` in the range of [0,360], the given `saturation` in
+    /// the range of [0,1], the given `value` in the range of [0,1], and the given `alpha` in the
+    /// range of [0,1].
+    public init(hue: Double, saturation: Double, value: Double, alpha: Double = 1) {
+
+        let hue = mod(hue,360)
+        let c = value * saturation
+        let x = c * (1 - abs(mod(hue/60,2) - 1))
+        let m = value - c
+
+        var rgb: (Double,Double,Double) {
+            switch hue {
+            case 0..<60:
+                return (c,x,0)
+            case 60..<120:
+                return (x,c,0)
+            case 120..<180:
+                return (0,c,x)
+            case 180..<240:
+                return (0,x,c)
+            case 240..<300:
+                return (x,0,c)
+            case 300..<360:
+                return (c,0,x)
+            default:
+                fatalError("Impossible")
+            }
+        }
+
+        self.init(red: rgb.0 + m, green: rgb.1 + m, blue: rgb.2 + m)
     }
 
     /// Create a `Color` with the given `white` and `alpha` values.
