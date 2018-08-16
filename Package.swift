@@ -30,7 +30,7 @@ let package = Package(
         // Tests
         .testTarget(name: "GeometryTests", dependencies: ["Geometry"]),
         .testTarget(name: "PathTests", dependencies: ["Path"]),
-        .testTarget(name: "RenderingTests", dependencies: ["Rendering"]),
+        .testTarget(name: "RenderingTests", dependencies: ["Rendering". "GraphicsTesting"]),
         .testTarget(name: "SVGTests", dependencies: ["SVG", "GraphicsTesting"]),
         .testTarget(name: "QuartzAdapterTests", dependencies: ["QuartzAdapter", "GraphicsTesting"])
     ]
