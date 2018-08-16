@@ -19,22 +19,11 @@ import Geometry
 /// Model of a Bézier curve.
 public struct BezierCurve {
     
-    // MARK: - Nested Types
-    
-    /// Order of `BezierCurve`.
-    public enum Order: Int {
-        case linear = 2
-        case quadratic = 3
-        case cubic = 4
-    }
-    
     // MARK: - Instance Properties
     
     /// - TODO: Consider making `func` with `accuracy` parameter.
     public var axisAlignedBoundingBox: Rectangle {
-        
         switch order {
-            
         case .linear:
             let minX = min(points[0].x, points[1].x)
             let minY = min(points[0].y, points[1].y)
@@ -43,7 +32,6 @@ public struct BezierCurve {
             let width = maxX - minX
             let height = maxY - minY
             return Rectangle(x: minX, y: minY, width: width, height: height)
-            
         default:
             let (first,rest) = simplified(segmentCount: 10).destructured!
             var minX = first.x
@@ -64,7 +52,7 @@ public struct BezierCurve {
     
     /// Order of `BezierCurve`.
     public var order: Order {
-        
+
         guard let order = Order(rawValue: points.count) else {
             fatalError("Somehow you have managed to create an unsupported Bézier curve!")
         }
@@ -96,7 +84,8 @@ public struct BezierCurve {
             return lines.map { $0.length }.sum
         }
     }
-    
+
+    /// The control points defining a Bézier curve.
     public let points: [Point]
     
     // MARK: - Initializers
@@ -233,11 +222,7 @@ public struct BezierCurve {
     
     /// - Returns: Array of `Point` values.
     public func simplified(segmentCount: Int) -> [Point] {
-        
-        if order == .linear {
-            return [start, end]
-        }
-        
+        if order == .linear { return [start, end] }
         let segment = 1 / Double(segmentCount)
         return stride(from: 0, through: 1, by: segment).map { t in self[t] }
     }
@@ -261,18 +246,25 @@ public struct BezierCurve {
         func split(points: [Point], at t: Double, into left: [Point], and right: [Point])
             -> ([Point], [Point])
         {
-
-            guard points.count > 1 else {
-                return (left + [points.first!], right + [points.first!])
-            }
-
+            guard points.count > 1 else { return (left + [points.first!], right + [points.first!]) }
             let left = left + [points.first!]
             let right = right + [points.last!]
             let points = points.pairs.map { (a: Point, b: Point) -> Point in (1-t) * a + t * b }
             return split(points: points, at: t, into: left, and: right)
         }
-
         return split(points: controlPoints, at: t, into: [], and: [])
+    }
+}
+
+extension BezierCurve {
+
+    // MARK: - Nested Types
+
+    /// Order of `BezierCurve`.
+    public enum Order: Int {
+        case linear = 2
+        case quadratic = 3
+        case cubic = 4
     }
 }
 
@@ -390,4 +382,20 @@ extension BezierCurve: CustomStringConvertible {
             return "Cube: \(points[0]) -> \(points[1]) -> \(points[2]) -> \(points[3]))"
         }
     }
+}
+
+extension Array {
+    // Given sequence of 2-tuples, return two arrays
+    func unzip <T,U> () -> ([T],[U]) where Element == (T,U) {
+        var t: [T] = []
+        var u: [U] = []
+        t.reserveCapacity(count)
+        u.reserveCapacity(count)
+        for (a, b) in self {
+            t.append(a)
+            u.append(b)
+        }
+        return (t,u)
+    }
+
 }
