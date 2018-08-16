@@ -9,109 +9,113 @@
 import Geometry
 import Path
 import Rendering
-
 import XCTest
+
+class CompositeTests: XCTestCase {
+
+    func testTranslateLeaf() {
+        let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
+        let path = Path.circle(center: Point(), radius: 10)
+        let styled = StyledPath(frame: frame, path: path)
+        let leaf = StyledPath.Composite.leaf(.path(styled))
+        let translated = leaf.translated(by: Point(x: 10, y: 10))
+        let expected = Rectangle(x: 20, y: 20, width: 100, height: 100)
+        XCTAssertEqual(translated.frame, expected)
+    }
+
+    func testTranslateGroup() {
+        let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
+        let group = Group(frame: frame)
+        let path = Path.circle(center: Point(), radius: 10)
+        let styled = StyledPath(frame: frame, path: path)
+        let leaf = StyledPath.Composite.leaf(.path(styled))
+        let branch = StyledPath.Composite.branch(group, [leaf])
+        let translated = branch.translated(by: Point(x: 10, y: 10))
+        let expected = Rectangle(x: 20, y: 20, width: 100, height: 100)
+        XCTAssertEqual(translated.frame, expected)
+    }
+
+    func testLeafAxisAlignedBoundingBox() {
+        let path = Path.circle(center: Point(), radius: 10)
+        let composite = StyledPath.Composite.leaf(.path(StyledPath(path: path)))
+        let bbox = composite.axisAlignedBoundingBox
+        let expected = Rectangle(x: -10, y: -10, width: 20, height: 20)
+        XCTAssertEqual(bbox, expected)
+    }
+
+    func testLeafAxisAlignedBoundingBoxNonZeroFrame() {
+
+        let path = Path.circle(center: Point(), radius: 10)
+
+        let renderedPath = StyledPath(
+            frame: Rectangle(origin: Point(x: 10, y: 10)),
+            path: path
+        )
+
+        let composite = StyledPath.Composite.leaf(.path(renderedPath))
+        let bbox = composite.axisAlignedBoundingBox
+        let expected = Rectangle(x: -20, y: -20, width: 20, height: 20)
+        XCTAssertEqual(bbox, expected)
+    }
+
+    func testBranchAllZeroFramedLeaves() {
+
+        // bbox: (0,0),20,100
+        let a = Path.rectangle(origin: Point(), size: Size(width: 100, height: 10))
+        let styledA = StyledPath(path: a)
+
+        // bbox: (-15,-15),40,40
+        let b = Path.circle(center: Point(x: 5, y: 5), radius: 20)
+        let styledB = StyledPath(path: b)
+
+        let composite = StyledPath.Composite.branch(
+            Group(), [
+                .leaf(.path(styledA)),
+                .leaf(.path(styledB))
+            ]
+        )
+
+        let bbox = composite.axisAlignedBoundingBox
+        let expected = Rectangle(x: -15, y: -15, width: 115, height: 40)
+        XCTAssertEqual(bbox, expected)
+    }
+
+    func testBranchAllZeroFramedLeavesButNonZeroGroup() {
+
+        // bbox: (0,0),20,100
+        let a = Path.rectangle(origin: Point(), size: Size(width: 100, height: 10))
+        let styledA = StyledPath(path: a)
+
+        // bbox: (-15,-15),40,40
+        let b = Path.circle(center: Point(x: 5, y: 5), radius: 20)
+        let styledB = StyledPath(path: b)
+
+        let group = Group(frame: Rectangle(origin: Point(x: 1, y: 1)))
+        let composite = StyledPath.Composite.branch(
+            group, [
+                .leaf(.path(styledA)),
+                .leaf(.path(styledB))
+            ]
+        )
+
+        let bbox = composite.axisAlignedBoundingBox
+        let expected = Rectangle(x: -16, y: -16, width: 115, height: 40)
+
+        XCTAssertEqual(bbox, expected)
+    }
+}
 
 // FIXME: Reintroduce
 //import GraphicsTestTools
 
 //class CompositeTests: GraphicsTestCase {
 //
-//    func testTranslateLeaf() {
-//        let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
-//        let path = Path.circle(center: Point(), radius: 10)
-//        let styled = StyledPath(frame: frame, path: path)
-//        let leaf = Composite.leaf(.path(styled))
-//        let translated = leaf.translated(by: Point(x: 10, y: 10))
-//        let expected = Rectangle(x: 20, y: 20, width: 100, height: 100)
-//        XCTAssertEqual(translated.frame, expected)
-//    }
-//
-//    func testTranslateGroup() {
-//        let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
-//        let group = Group(frame: frame)
-//        let path = Path.circle(center: Point(), radius: 10)
-//        let styled = RenderedPath(frame: frame, path: path)
-//        let leaf = Composite.leaf(.path(styled))
-//        let branch = Composite.branch(group, [leaf])
-//        let translated = branch.translated(by: Point(x: 10, y: 10))
-//        let expected = Rectangle(x: 20, y: 20, width: 100, height: 100)
-//        XCTAssertEqual(translated.frame, expected)
-//    }
-//
-//    func testLeafAxisAlignedBoundingBox() {
-//        let path = Path.circle(center: Point(), radius: 10)
-//        let composite = Composite.leaf(.path(RenderedPath(path: path)))
-//        let bbox = composite.axisAlignedBoundingBox
-//        let expected = Rectangle(x: -10, y: -10, width: 20, height: 20)
-//        XCTAssertEqual(bbox, expected)
-//    }
-//
-//    func testLeafAxisAlignedBoundingBoxNonZeroFrame() {
-//
-//        let path = Path.circle(center: Point(), radius: 10)
-//
-//        let renderedPath = RenderedPath(
-//            frame: Rectangle(origin: Point(x: 10, y: 10)),
-//            path: path
-//        )
-//
-//        let composite = Composite.leaf(.path(renderedPath))
-//        let bbox = composite.axisAlignedBoundingBox
-//        let expected = Rectangle(x: -20, y: -20, width: 20, height: 20)
-//        XCTAssertEqual(bbox, expected)
-//    }
-//
-//    func testBranchAllZeroFramedLeaves() {
-//
-//        // bbox: (0,0),20,100
-//        let a = Path.rectangle(origin: Point(), size: Size(width: 100, height: 10))
-//        let styledA = RenderedPath(path: a)
-//
-//        // bbox: (-15,-15),40,40
-//        let b = Path.circle(center: Point(x: 5, y: 5), radius: 20)
-//        let styledB = RenderedPath(path: b)
-//
-//        let composite = Composite.branch(
-//            Group(), [
-//                .leaf(.path(styledA)),
-//                .leaf(.path(styledB))
-//            ]
-//        )
-//
-//        let bbox = composite.axisAlignedBoundingBox
-//        let expected = Rectangle(x: -15, y: -15, width: 115, height: 40)
-//        XCTAssertEqual(bbox, expected)
-//    }
-//
-//    func testBranchAllZeroFramedLeavesButNonZeroGroup() {
-//
-//        // bbox: (0,0),20,100
-//        let a = Path.rectangle(origin: Point(), size: Size(width: 100, height: 10))
-//        let styledA = RenderedPath(path: a)
-//
-//        // bbox: (-15,-15),40,40
-//        let b = Path.circle(center: Point(x: 5, y: 5), radius: 20)
-//        let styledB = RenderedPath(path: b)
-//
-//        let group = Group(frame: Rectangle(origin: Point(x: 1, y: 1)))
-//        let composite = Composite.branch(
-//            group, [
-//                .leaf(.path(styledA)),
-//                .leaf(.path(styledB))
-//            ]
-//        )
-//
-//        let bbox = composite.axisAlignedBoundingBox
-//        let expected = Rectangle(x: -16, y: -16, width: 115, height: 40)
-//
-//        XCTAssertEqual(bbox, expected)
-//    }
+
 //
 //    func testResizedToFitContentsLeafNoChange() {
 //
 //        let rect = Rectangle(width: 10, height: 10)
-//        let renderedPath = RenderedPath(frame: rect, path: Path.rectangle(rect))
+//        let renderedPath = StyledPath(frame: rect, path: Path.rectangle(rect))
 //        let composite = Composite.leaf(.path(renderedPath))
 //        let resized = composite.resizedToFitContents
 //
@@ -131,7 +135,7 @@ import XCTest
 //    func testResizedToFitContentsLeafNoTranslation() {
 //
 //        let rect = Rectangle(width: 10, height: 10)
-//        let renderedPath = RenderedPath(frame: .zero, path: Path.rectangle(rect))
+//        let renderedPath = StyledPath(frame: .zero, path: Path.rectangle(rect))
 //        let composite = Composite.leaf(.path(renderedPath))
 //        let resized = composite.resizedToFitContents
 //
@@ -152,7 +156,7 @@ import XCTest
 //
 //        let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
 //        let path = Path.rectangle(x: 5, y: 5, width: 10, height: 10)
-//        let renderedPath = RenderedPath(frame: frame, path: path)
+//        let renderedPath = StyledPath(frame: frame, path: path)
 //        let composite = Composite.leaf(.path(renderedPath))
 //        let resized = composite.resizedToFitContents
 //
@@ -178,13 +182,13 @@ import XCTest
 //        let a = Path.rectangle(x: 0, y: 0, width: 3, height: 3)
 //
 //        // Offset by 20,20 in parent coordinates
-//        let styledA = RenderedPath(frame: Rectangle(x: 20, y: 20, width: 4, height: 4), path: a)
+//        let styledA = StyledPath(frame: Rectangle(x: 20, y: 20, width: 4, height: 4), path: a)
 //
 //        // Offset by 5,5 in own coordinates
 //        let b = Path.rectangle(x: 5, y: 5, width: 5, height: 5)
 //
 //        // Offset by 2,2 in parent coordinates
-//        let styledB = RenderedPath(frame: Rectangle(x: 2, y: 2, width: 10, height: 10), path: b)
+//        let styledB = StyledPath(frame: Rectangle(x: 2, y: 2, width: 10, height: 10), path: b)
 //
 //        let composite = Composite.branch(group, [.leaf(.path(styledA)), .leaf(.path(styledB))])
 //        let resized = composite.resizedToFitContents
@@ -211,13 +215,13 @@ import XCTest
 //        let a = Path.rectangle(x: 0, y: 0, width: 3, height: 3)
 //
 //        // Offset by 0,0 in parent coordinates
-//        let styledA = RenderedPath(frame: Rectangle(x: 0, y: 0, width: 3, height: 3), path: a)
+//        let styledA = StyledPath(frame: Rectangle(x: 0, y: 0, width: 3, height: 3), path: a)
 //
 //        // Offset by 0,0 in own coordinates
 //        let b = Path.rectangle(x: 0, y: 0, width: 10, height: 10)
 //
 //        // Offset by 20,20 in parent coordinates
-//        let styledB = RenderedPath(frame: Rectangle(x: 20, y: 20, width: 10, height: 10), path: b)
+//        let styledB = StyledPath(frame: Rectangle(x: 20, y: 20, width: 10, height: 10), path: b)
 //
 //        let composite = Composite.branch(group, [.leaf(.path(styledA)), .leaf(.path(styledB))])
 //        let resized = composite.resizedToFitContents
