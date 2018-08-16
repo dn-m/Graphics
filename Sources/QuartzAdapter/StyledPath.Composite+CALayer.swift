@@ -13,9 +13,9 @@ import Rendering
 
 extension CALayer {
 
-    public convenience init(_ composite: Composite) {
+    public convenience init(_ composite: RenderedPath.Composite) {
 
-        func traverse(_ composite: Composite, building container: CALayer) {
+        func traverse(_ composite: RenderedPath.Composite, building container: CALayer) {
             switch composite {
 
             // FIXME: Encapsulate in Item

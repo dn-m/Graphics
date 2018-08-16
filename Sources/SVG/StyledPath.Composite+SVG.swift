@@ -27,7 +27,7 @@ extension Tree where Branch == Group, Leaf == Item {
     public init(_ svg: SVG) {
         
         // Transform SVG structure in RenderedPath.Composite
-        let structure: Composite = .init(svg.structure)
+        let structure: RenderedPath.Composite = .init(svg.structure)
 
         // Normalize frame
         // TODO: Move this all to RenderedPath.Composite.init
@@ -56,7 +56,7 @@ extension Tree where Branch == Group, Leaf == Item {
     public init(_ svg: SVG, height: Double) {
 
         // Transform SVG structure in RenderedPath.Composite
-        let structure: Composite = .init(svg.structure)
+        let structure: RenderedPath.Composite = .init(svg.structure)
 
         // Normalize frame
         // TODO: Move this all to RenderedPath.Composite.init
@@ -95,7 +95,7 @@ extension Tree where Branch == Group, Leaf == Item {
     public init(_ svg: SVG, width: Double) {
 
         // Transform SVG structure in RenderedPath.Composite
-        let structure: Composite = .init(svg.structure)
+        let structure: RenderedPath.Composite = .init(svg.structure)
 
         // Normalize frame
         // TODO: Move this all to RenderedPath.Composite.init

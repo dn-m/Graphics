@@ -9,7 +9,11 @@
 import DataStructures
 import Geometry
 
-public typealias Composite = Tree<Group,Item>
+extension RenderedPath {
+
+    /// A hiearchical collection of rendered path graphical items.
+    public typealias Composite = Tree<Group,Item>
+}
 
 // TODO: Use extension RenderedPath.Composite when Swift allows it.
 extension Tree where Branch == Group, Leaf == Item {
@@ -23,7 +27,7 @@ extension Tree where Branch == Group, Leaf == Item {
         }
     }
 
-    public var resizedToFitContents: Composite {
+    public var resizedToFitContents: RenderedPath.Composite {
 
         switch self {
 
@@ -57,7 +61,7 @@ extension Tree where Branch == Group, Leaf == Item {
         }
     }
 
-    public func translated(by point: Point) -> Composite {
+    public func translated(by point: Point) -> RenderedPath.Composite {
         switch self {
         case let .leaf(renderedPath):
             return .leaf(renderedPath.translated(by: point))
