@@ -20,7 +20,7 @@ import XCTest
 //    func testTranslateLeaf() {
 //        let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
 //        let path = Path.circle(center: Point(), radius: 10)
-//        let styled = RenderedPath(frame: frame, path: path)
+//        let styled = StyledPath(frame: frame, path: path)
 //        let leaf = Composite.leaf(.path(styled))
 //        let translated = leaf.translated(by: Point(x: 10, y: 10))
 //        let expected = Rectangle(x: 20, y: 20, width: 100, height: 100)

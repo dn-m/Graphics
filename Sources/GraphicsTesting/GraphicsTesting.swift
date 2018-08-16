@@ -40,7 +40,7 @@ public func openArtifactsDirectory() {
 }
 
 /// If running on macOS, create a PDF with the given `Composite` graphical object.
-public func render(_ composite: RenderedPath.Composite, testName: String, fileName: String) {
+public func render(_ composite: StyledPath.Composite, testName: String, fileName: String) {
     #if os(OSX)
     let layer = CALayer(composite)
     layer.renderToPDF(at: testCaseDirectory(for: testName).appendingPathComponent("fileName"))

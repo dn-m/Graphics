@@ -10,5 +10,5 @@
 public protocol Renderable {
     
     /// `Composite`-representation of `Renderable`-conforming type.
-    var rendered: RenderedPath.Composite { get }
+    var rendered: StyledPath.Composite { get }
 }

@@ -9,13 +9,13 @@
 import DataStructures
 import Geometry
 
-extension RenderedPath {
+extension StyledPath {
 
     /// A hiearchical collection of rendered path graphical items.
     public typealias Composite = Tree<Group,Item>
 }
 
-// TODO: Use extension RenderedPath.Composite when Swift allows it.
+// TODO: Use extension StyledPath.Composite when Swift allows it.
 extension Tree where Branch == Group, Leaf == Item {
 
     public var frame: Rectangle {
@@ -27,7 +27,7 @@ extension Tree where Branch == Group, Leaf == Item {
         }
     }
 
-    public var resizedToFitContents: RenderedPath.Composite {
+    public var resizedToFitContents: StyledPath.Composite {
 
         switch self {
 
@@ -61,7 +61,7 @@ extension Tree where Branch == Group, Leaf == Item {
         }
     }
 
-    public func translated(by point: Point) -> RenderedPath.Composite {
+    public func translated(by point: Point) -> StyledPath.Composite {
         switch self {
         case let .leaf(renderedPath):
             return .leaf(renderedPath.translated(by: point))

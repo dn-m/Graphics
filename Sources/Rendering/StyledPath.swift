@@ -9,7 +9,7 @@
 import Geometry
 import Path
 
-public struct RenderedPath {
+public struct StyledPath {
     
     public let frame: Rectangle
     public let path: Path
@@ -27,9 +27,9 @@ public struct RenderedPath {
     }
 }
 
-extension RenderedPath {
+extension StyledPath {
 
-    public var resizedToFitContents: RenderedPath {
+    public var resizedToFitContents: StyledPath {
 
         // Get the bounding box of the path in local coordinate space
         let bbox = self.path.axisAlignedBoundingBox
@@ -40,18 +40,18 @@ extension RenderedPath {
         // Adjust the position within parent coordinate space to compensate for change in path
         let frame = bbox.translated(by: self.frame.origin)
 
-        return RenderedPath(
+        return StyledPath(
             frame: frame,
             path: path,
             styling: styling
         )
     }
 
-    public func translated(by point: Point) -> RenderedPath {
-        return RenderedPath(frame: frame.translated(by: point), path: path, styling: styling)
+    public func translated(by point: Point) -> StyledPath {
+        return StyledPath(frame: frame.translated(by: point), path: path, styling: styling)
     }
 
-    public func scaled(by value: Double) -> RenderedPath {
+    public func scaled(by value: Double) -> StyledPath {
 
         let fill = styling.fill
         let stroke = styling.stroke
@@ -66,14 +66,14 @@ extension RenderedPath {
 
         let newStyle = Styling(fill: fill, stroke: newStroke)
 
-        return RenderedPath(frame: frame, path: path.scaled(by: value), styling: newStyle)
+        return StyledPath(frame: frame, path: path.scaled(by: value), styling: newStyle)
     }
 }
 
-extension RenderedPath: CustomStringConvertible {
+extension StyledPath: CustomStringConvertible {
 
     public var description: String {
-        var result = "RenderedPath:\n"
+        var result = "StyledPath:\n"
         result += "Frame: \(frame)\n"
         result += "\(path)\n"
         result += "\(styling)"

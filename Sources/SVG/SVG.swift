@@ -27,8 +27,8 @@ public struct SVG {
         "polygon": Polygon.self
     ]
     
-    /// Composite structure of `SVG.Group` values containing `RenderedPath` values.
-    public typealias Structure = Tree<Group,RenderedPath>
+    /// Composite structure of `SVG.Group` values containing `StyledPath` values.
+    public typealias Structure = Tree<Group,StyledPath>
     
     /// View rectangle.
     public let viewBox: Rectangle

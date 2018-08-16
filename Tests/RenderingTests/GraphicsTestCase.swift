@@ -20,7 +20,7 @@ import XCTest
 //    func testPDF() {
 //        let path = Path.circle(center: .zero, radius: 10)
 //        let styling = Styling(fill: Fill(color: .chartreuse))
-//        let renderedPath = RenderedPath(path: path, styling: styling)
+//        let renderedPath = StyledPath(path: path, styling: styling)
 //        render(renderedPath, name: "testCircle3")
 //    }
 //}
