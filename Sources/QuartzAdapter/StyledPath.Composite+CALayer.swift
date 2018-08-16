@@ -1,5 +1,5 @@
 //
-//  RenderedPath.Composite+CALayer.swift
+//  StyledPath.Composite+CALayer.swift
 //  Rendering
 //
 //  Created by James Bean on 6/19/17.
@@ -13,9 +13,9 @@ import Rendering
 
 extension CALayer {
 
-    public convenience init(_ composite: RenderedPath.Composite) {
+    public convenience init(_ composite: StyledPath.Composite) {
 
-        func traverse(_ composite: RenderedPath.Composite, building container: CALayer) {
+        func traverse(_ composite: StyledPath.Composite, building container: CALayer) {
             switch composite {
 
             // FIXME: Encapsulate in Item

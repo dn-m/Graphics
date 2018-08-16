@@ -10,7 +10,7 @@ import Geometry
 
 public enum Item {
 
-    case path(RenderedPath)
+    case path(StyledPath)
     //case text(Text)
 
     public var frame: Rectangle {

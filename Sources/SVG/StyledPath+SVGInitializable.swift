@@ -12,7 +12,7 @@ import DataStructures
 import Path
 import Rendering
 
-extension RenderedPath {
+extension StyledPath {
     
     init(svgElement: SVGElement) throws {
         self.init(

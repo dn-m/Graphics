@@ -1,5 +1,5 @@
 //
-//  RenderedPath.Composite+SVG.swift
+//  StyledPath.Composite+SVG.swift
 //  Rendering
 //
 //  Created by James Bean on 6/19/17.
@@ -19,18 +19,18 @@ extension Group {
     }
 }
 
-// TODO: Use extension RenderedPath.Composite when Swift allows it
+// TODO: Use extension StyledPath.Composite when Swift allows it
 // TODO: Refactor to keep DRY.
 extension Tree where Branch == Group, Leaf == Item {
     
-    /// Creates a `RenderedPath.Composite` with the given `svg`.
+    /// Creates a `StyledPath.Composite` with the given `svg`.
     public init(_ svg: SVG) {
         
-        // Transform SVG structure in RenderedPath.Composite
-        let structure: RenderedPath.Composite = .init(svg.structure)
+        // Transform SVG structure in StyledPath.Composite
+        let structure: StyledPath.Composite = .init(svg.structure)
 
         // Normalize frame
-        // TODO: Move this all to RenderedPath.Composite.init
+        // TODO: Move this all to StyledPath.Composite.init
         // FIXME: Refactor incorporating text
         let boundingBox = structure.leaves
             .map { leaf -> Rectangle in
@@ -52,14 +52,14 @@ extension Tree where Branch == Group, Leaf == Item {
         self = .branch(root, [translated])
     }
 
-    /// Creates a `RenderedPath.Composite` with the given `svg`, scaled to the given `height`.
+    /// Creates a `StyledPath.Composite` with the given `svg`, scaled to the given `height`.
     public init(_ svg: SVG, height: Double) {
 
-        // Transform SVG structure in RenderedPath.Composite
-        let structure: RenderedPath.Composite = .init(svg.structure)
+        // Transform SVG structure in StyledPath.Composite
+        let structure: StyledPath.Composite = .init(svg.structure)
 
         // Normalize frame
-        // TODO: Move this all to RenderedPath.Composite.init
+        // TODO: Move this all to StyledPath.Composite.init
         // FIXME: Refactor incorporating text
         let boundingBox = structure.leaves
             .map { leaf -> Rectangle in
@@ -91,14 +91,14 @@ extension Tree where Branch == Group, Leaf == Item {
         self = .branch(root, [translated])
     }
 
-    /// Creates a `RenderedPath.Composite` with the given `svg`, scaled to the given `width`.
+    /// Creates a `StyledPath.Composite` with the given `svg`, scaled to the given `width`.
     public init(_ svg: SVG, width: Double) {
 
-        // Transform SVG structure in RenderedPath.Composite
-        let structure: RenderedPath.Composite = .init(svg.structure)
+        // Transform SVG structure in StyledPath.Composite
+        let structure: StyledPath.Composite = .init(svg.structure)
 
         // Normalize frame
-        // TODO: Move this all to RenderedPath.Composite.init
+        // TODO: Move this all to StyledPath.Composite.init
         // FIXME: Refactor incorporating text
         let boundingBox = structure.leaves
             .map { leaf -> Rectangle in
