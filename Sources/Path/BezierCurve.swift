@@ -52,7 +52,7 @@ public struct BezierCurve {
     
     /// Order of `BezierCurve`.
     public var order: Order {
-        
+
         guard let order = Order(rawValue: points.count) else {
             fatalError("Somehow you have managed to create an unsupported Bézier curve!")
         }

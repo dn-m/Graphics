@@ -1,5 +1,5 @@
 //
-//  Composite.swift
+//  StyledPath.Composite.swift
 //  Rendering
 //
 //  Created by James Bean on 7/25/17.
