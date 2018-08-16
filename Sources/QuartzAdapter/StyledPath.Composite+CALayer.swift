@@ -8,6 +8,7 @@
 
 #if os(iOS) || os(watchOS) || os(tvOS) || os(OSX)
 
+import DataStructures
 import QuartzCore
 import Rendering
 
@@ -37,6 +38,15 @@ extension CALayer {
         self.init()
         self.frame = CGRect(composite.frame)
         traverse(composite.resizedToFitContents, building: self)
+    }
+}
+
+extension Tree where Branch == Group, Leaf == Item {
+
+    public func renderToPDF(at location: URL) throws {
+        let layer = CALayer(self)
+        layer.showTestBorder()
+        try layer.renderToPDF(at: location)
     }
 }
 

@@ -20,18 +20,27 @@ public let artifactsDirectory: URL = Bundle.main.bundleURL
 
 /// The URL of the directory where the graphics test artifacts for the given `testName` will be
 /// generated.
-public func testCaseDirectory(for testName: String) -> URL {
-    return artifactsDirectory.appendingPathComponent(testName)
+public func testCaseDirectory(for testCaseName: String) -> URL {
+    return artifactsDirectory.appendingPathComponent(testCaseName)
+}
+
+/// - Returns: The URL for the given `fileName` in the directory for the given `testCaseName`.
+public func location(forFile fileName: String, in testCaseName: String) -> URL {
+    return testCaseDirectory(for: testCaseName).appendingPathComponent(fileName)
 }
 
 /// Creates the directory where the graphics test artifacts for the given `testName` will be
 /// generated.
-public func createArtifactsDirectory(for testName: String) throws {
-    try FileManager.default.createDirectory(
-        at: testCaseDirectory(for: testName),
-        withIntermediateDirectories: true,
-        attributes: nil
-    )
+public func createArtifactsDirectory(for testName: String) {
+    do {
+        try FileManager.default.createDirectory(
+            at: testCaseDirectory(for: testName),
+            withIntermediateDirectories: true,
+            attributes: nil
+        )
+    } catch {
+        print(error)
+    }
 }
 
 /// Opens the artifacts directory in the finder for easy visual perusing.
@@ -39,16 +48,23 @@ public func openArtifactsDirectory() {
     _ = shell("open", artifactsDirectory.absoluteString)
 }
 
-/// If running on macOS, create a PDF with the given `Composite` graphical object.
-public func render(_ composite: StyledPath.Composite, testName: String, fileName: String) {
+/// Render the given `StyledPath.Composite` to PDF in the direction for the test case with the given
+/// `testCaseName`, with the given `fileName`.
+public func render(
+    _ composite: StyledPath.Composite,
+    fileName: String,
+    testCaseName: String
+) {
     #if os(OSX)
-    let layer = CALayer(composite)
-    layer.renderToPDF(at: testCaseDirectory(for: testName).appendingPathComponent("fileName"))
+    do {
+        try composite.renderToPDF(at: location(forFile: fileName + ".pdf", in: testCaseName))
+    } catch {
+        print(error)
+    }
     #else
-    print("We are not on macOS, so we are not going to generate graphics test artifacts.")
+    print("PDF rendering tests only supported on macOS")
     #endif
 }
-
 
 /// Runs the given bash `args`.
 private func shell(_ args: String...) -> Int32 {

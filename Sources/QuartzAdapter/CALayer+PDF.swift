@@ -13,7 +13,13 @@ import Rendering
 
 extension CALayer {
 
-    public func renderToPDF(at location: URL) {
+    enum Error: Swift.Error {
+        case couldNotCreateContextAtLocation(URL)
+    }
+
+    public func renderToPDF(at location: URL) throws {
+
+        print("render to PDF at: \(location)")
 
         let margin: CGFloat = 20
         var pageFrame = CGRect(
@@ -23,7 +29,10 @@ extension CALayer {
             height: bounds.height + 2 * margin
         )
 
-        let context = CGContext(location as CFURL, mediaBox: &pageFrame, nil)!
+        guard let context = CGContext(location as CFURL, mediaBox: &pageFrame, nil) else {
+            throw Error.couldNotCreateContextAtLocation(location)
+        }
+
         context.beginPDFPage(nil)
 
         // flip coordinates
