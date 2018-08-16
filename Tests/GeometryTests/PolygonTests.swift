@@ -75,16 +75,16 @@ class PolygonTests: XCTestCase {
 
     func testVertexConvexTrue() {
         // < = convex, when points arranged counterclockwise
-        let triangle = Triangle(Point(x: 0, y: 10), Point(x: -10, y: 0), Point(x: 0, y: -10))
-        XCTAssert(triangle.isConvex(rotation: .counterClockwise))
-        XCTAssertFalse(triangle.isConvex(rotation: .clockwise))
+        let vertices = (Point(x: 0, y: 10), Point(x: -10, y: 0), Point(x: 0, y: -10))
+        XCTAssert(isConvex(vertices, traversing: .counterClockwise))
+        XCTAssertFalse(isConvex(vertices, traversing: .clockwise))
     }
 
     func testVertexConvexFalse() {
         // > = concave, when points arranged counterclockwise
-        let triangle = Triangle(Point(x: 0, y: 10), Point(x: 10, y: 0), Point(x: 0, y: -10))
-        XCTAssertFalse(triangle.isConvex(rotation: .counterClockwise))
-        XCTAssert(triangle.isConvex(rotation: .clockwise))
+        let vertices = (Point(x: 0, y: 10), Point(x: 10, y: 0), Point(x: 0, y: -10))
+        XCTAssertFalse(isConvex(vertices, traversing: .counterClockwise))
+        XCTAssert(isConvex(vertices, traversing: .clockwise))
     }
 
     func testTriangleEqualToTriangulatedSelf() {

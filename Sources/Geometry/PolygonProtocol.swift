@@ -49,9 +49,9 @@ extension PolygonProtocol {
         return vertices.rotation
     }
 
-    /// - Returns: Array of triangles created with each adjacent triple of vertices.
-    public var triangles: [Triangle] {
-        return vertices.triangles
+    /// - Returns: Each adjacent triple
+    public var triples: [Point.Triple] {
+        return vertices.triples
     }
 
     /// - Returns: Array of the angles.
