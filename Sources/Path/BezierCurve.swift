@@ -148,9 +148,10 @@ public struct BezierCurve {
         case .linear:
             return [(x - start.x) * (end.x - start.x)]
         case .quadratic:
+            let control = points[1]
             let c = start
-            let b = 2 * (points[1] - start)
-            let a = start - 2 * points[1] + end
+            let b = 2 * (control - start)
+            let a = start - 2 * control + end
             return quadratic(a, b, c, \.x)
         case .cubic:
             return cardano(points: points, line: .vertical(at: x))
@@ -163,9 +164,10 @@ public struct BezierCurve {
         case .linear:
             return [(y - start.y) * (end.y - start.y)]
         case .quadratic:
+            let control = points[1]
             let c = start
-            let b = 2 * (points[1] - start)
-            let a = start - 2 * points[1] + end
+            let b = 2 * (control - start)
+            let a = start - 2 * control + end
             return quadratic(a, b, c, \.y)
         case .cubic:
             return cardano(points: points, line: .horizontal(at: y))
@@ -270,7 +272,18 @@ extension BezierCurve {
 
 extension BezierCurve: Equatable { }
 
-public func quadratic(_ a: Point, _ b: Point, _ c: Point, _ keyPath: KeyPath<Point,Double>) -> Set<Double> {
+extension BezierCurve {
+    /// - Returns: Coefficients for quadratic ONLY!
+    private var coeffs: (Point,Point,Point) {
+        let control = points[1]
+        let c = start
+        let b = 2 * (control - start)
+        let a = start - 2 * control + end
+        return (a,b,c)
+    }
+}
+
+private func quadratic(_ a: Point, _ b: Point, _ c: Point, _ keyPath: KeyPath<Point,Double>) -> Set<Double> {
     return quadratic(a[keyPath: keyPath], a[keyPath: keyPath], a[keyPath: keyPath])
 }
 
@@ -403,3 +416,4 @@ extension Array {
     }
 
 }
+
