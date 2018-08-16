@@ -33,6 +33,7 @@ public struct Polygon: PolygonProtocol {
         /// - Returns: `true` if the given `triangle` is valid for clipping off.
         ///
         /// A triangle is valid for cipping if it satisfies two requirements:
+        ///
         /// - It is convex, given the order of traversal.
         /// - There are no remaining vertices contained within its area.
         ///
