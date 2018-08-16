@@ -48,6 +48,8 @@ public func openArtifactsDirectory() {
     _ = shell("open", artifactsDirectory.absoluteString)
 }
 
+/// Render the given `StyledPath.Composite` to PDF in the direction for the test case with the given
+/// `testCaseName`, with the given `fileName`.
 public func render(
     _ composite: StyledPath.Composite,
     fileName: String,
