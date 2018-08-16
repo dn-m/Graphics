@@ -130,7 +130,6 @@ class CompositeTests: XCTestCase {
     }
 
     func testResizedToFitContentsLeafScaleAndTranslation() {
-
         let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
         let path = Path.rectangle(x: 5, y: 5, width: 10, height: 10)
         let renderedPath = StyledPath(frame: frame, path: path)
