@@ -24,18 +24,6 @@ public struct Triangle: ConvexPolygonProtocol {
 
     // MARK: - Instance Properties
 
-    #warning("Move to function over (Point,Point,Point)")
-    /// - Returns: The angle of `Triangle`.
-//    public var angle: Angle {
-//
-//        let (p1, center, p2) = points
-//        let a = pow(center.x - p1.x, 2) + pow(center.y - p1.y, 2)
-//        let b = pow(center.x - p2.x, 2) + pow(center.y - p2.y, 2)
-//        let c = pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2)
-//
-//        return Angle(radians: acos((a + b - c) / sqrt(4 * a * b)))
-//    }
-
     public var crossProduct: Double {
         return Geometry.crossProduct(vertices[0], vertices[1], vertices[2])
     }
@@ -55,13 +43,8 @@ public struct Triangle: ConvexPolygonProtocol {
     /// - Warning: Will crash if given more or less than three vertices!
     ///
     public init <S: Sequence> (vertices: S) where S.Iterator.Element == Point {
-
         let vertices = VertexCollection(vertices)
-
-        guard vertices.count == 3 else {
-            fatalError("A triangle must have three vertices!")
-        }
-
+        precondition(vertices.count == 3, "A triangle must have three vertices!")
         self.vertices = vertices
     }
 
