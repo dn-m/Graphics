@@ -36,6 +36,11 @@ public struct Path {
     public let curves: [BezierCurve]
     
     // MARK: - Initializers
+
+    /// Create a `Path` with a single `curve`.
+    public init(_ curve: BezierCurve) {
+        self.init([curve])
+    }
     
     /// Create a `Path` with the given `curves`.
     public init(_ curves: [BezierCurve]) {

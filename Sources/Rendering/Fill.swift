@@ -28,8 +28,8 @@ public struct Fill {
     // MARK: - Initializers
     
     /// Creates a `Fill` with the given `color` and `rule`.
-    public init(color: Color = .black, rule: Rule = .nonZero) {
-        self.color = color
+    public init(color: Color? = nil, rule: Rule = .nonZero) {
+        self.color = color ?? Color(white: 1, alpha: 0)
         self.rule = rule
     }
 }
