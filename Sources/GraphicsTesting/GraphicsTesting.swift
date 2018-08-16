@@ -6,11 +6,12 @@
 //
 
 #if os(OSX)
+import QuartzCore
+import QuartzAdapter
+#endif
 
 import Foundation
 import Rendering
-import QuartzCore
-import QuartzAdapter
 
 let artifactsDirectory: URL = Bundle.main.bundleURL
     .deletingLastPathComponent()
@@ -41,13 +42,11 @@ private func shell(_ args: String...) -> Int32 {
     return task.terminationStatus
 }
 
-func render(_ layer: CALayer, testName: String, fileName: String) {
+func render(_ composite: Composite, testName: String, fileName: String) {
+    #if os(OSX)
+    let layer = CALayer(composite)
     layer.renderToPDF(at: testCaseDirectory(for: testName).appendingPathComponent("fileName"))
+    #else
+    print("We are not on macOS, so we are not going to generate graphics test artifacts.")
+    #endif
 }
-
-func render(_ path: RenderedPath, testName: String, fileName: String) {
-    render(CAShapeLayer(path), testName: testName, fileName: fileName)
-}
-
-#endif
-
