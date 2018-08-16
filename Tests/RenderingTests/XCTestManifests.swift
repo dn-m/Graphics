@@ -2,8 +2,17 @@ import XCTest
 
 extension ColorTests {
     static let __allTests = [
+        ("testBlack", testBlack),
+        ("testBlue", testBlue),
+        ("testCyan", testCyan),
+        ("testGreen", testGreen),
         ("testInitHexIntBlack", testInitHexIntBlack),
         ("testInitHexIntWhite", testInitHexIntWhite),
+        ("testInitHexStringYellow", testInitHexStringYellow),
+        ("testMagenta", testMagenta),
+        ("testRed", testRed),
+        ("testWhite", testWhite),
+        ("testYellow", testYellow),
     ]
 }
 
