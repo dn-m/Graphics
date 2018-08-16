@@ -8,29 +8,22 @@
 
 /// Structure representing a color.
 public struct Color {
-    
-    public struct Components {
-        public let red: Double
-        public let green: Double
-        public let blue: Double
-        public let alpha: Double
-    }
-    
-    public let components: Components
 
+    /// The red, green, blue, and alpha components of this Color`.
+    public let components: Components
+}
+
+extension Color {
+
+    // MARK: - Initializers
+
+    /// Create a `Color` with the given `red`, `green`, `blue`, and `alpha` values.
     public init(red: Double, green: Double, blue: Double, alpha: Double = 1) {
         self.components = Components(red: red, green: green, blue: blue, alpha: alpha)
     }
-    
-    public init(white: Double, alpha: Double = 1) {
-        self.init(red: white, green: white, blue: white, alpha: alpha)
-    }
-    
-    public init(gray: Double, alpha: Double) {
-        print("init(gray:alpha:) is deprecated in GraphicsTools 0.7. Use init(white:alpha:) instead.")
-        self.init(red: gray, green: gray, blue: gray, alpha: alpha)
-    }
-    
+
+    /// Create a `Color` with the given `red`, `green`, `blue`, and `alpha` values in the range
+    /// [0,255].
     public init(red: Int, green: Int, blue: Int, alpha: Double = 1) {
         self.init(
             red: Double(red) / 255,
@@ -39,8 +32,23 @@ public struct Color {
             alpha: alpha
         )
     }
-    
-    public init(hex: Int, alpha: Double) {
+
+    /// Create a `Color` with the given `cyan`, yellow`, `mageneta`, `black` and `alpha` values in
+    /// the range [0,1].
+    public init(cyan: Double, magenta: Double, yellow: Double, black: Double, alpha: Double = 1) {
+        let red = Int(255 * (1 - cyan) * (1 - black))
+        let green = Int(255 * (1 - magenta) * (1 - black))
+        let blue = Int(255 * (1 - yellow) * (1 - black))
+        self.init(red: red, green: green, blue: blue)
+    }
+
+    /// Create a `Color` with the given `white` and `alpha` values.
+    public init(white: Double, alpha: Double = 1) {
+        self.init(red: white, green: white, blue: white, alpha: alpha)
+    }
+
+    /// Create a `Color` with the given `hex` hexadecimal integer, and the `alpha` value.
+    public init(hex: Int, alpha: Double = 1) {
         self.init(
             red: (hex >> 16) & 0xFF,
             green: (hex >> 8) & 0xFF,
@@ -48,11 +56,25 @@ public struct Color {
             alpha: alpha
         )
     }
-    
+
+    /// Create a `Color` with the given `hex` string, and the given `alpha` value.
     public init?(hex: String, alpha: Double) {
         let hexString = hex.droppingHash
         guard let hex = Int(hexString, radix: 16) else { return nil }
         self.init(hex: hex, alpha: alpha)
+    }
+}
+
+extension Color {
+
+    // MARK: - Nested Types
+
+    /// The red, green, blue, and alpha components of this Color` in the range [0,1].
+    public struct Components {
+        public let red: Double
+        public let green: Double
+        public let blue: Double
+        public let alpha: Double
     }
 }
 
