@@ -19,8 +19,6 @@ extension CALayer {
 
     public func renderToPDF(at location: URL) throws {
 
-        print("render to PDF at: \(location)")
-
         let margin: CGFloat = 20
         var pageFrame = CGRect(
             x: 0,
