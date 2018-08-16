@@ -151,7 +151,7 @@ public struct BezierCurve {
             let c = start
             let b = 2 * (points[1] - start)
             let a = start - 2 * points[1] + end
-            return quadratic(a.x, b.x, c.x)
+            return quadratic(a, b, c, \.x)
         case .cubic:
             return cardano(points: points, line: .vertical(at: x))
         }
@@ -166,7 +166,7 @@ public struct BezierCurve {
             let c = start
             let b = 2 * (points[1] - start)
             let a = start - 2 * points[1] + end
-            return quadratic(a.y, b.y, c.y)
+            return quadratic(a, b, c, \.y)
         case .cubic:
             return cardano(points: points, line: .horizontal(at: y))
         }
@@ -269,6 +269,10 @@ extension BezierCurve {
 }
 
 extension BezierCurve: Equatable { }
+
+public func quadratic(_ a: Point, _ b: Point, _ c: Point, _ keyPath: KeyPath<Point,Double>) -> Set<Double> {
+    return quadratic(a[keyPath: keyPath], a[keyPath: keyPath], a[keyPath: keyPath])
+}
 
 /// - returns: A `Set` of 0, 1, or 2 x-intercepts for the given coefficients.
 ///
