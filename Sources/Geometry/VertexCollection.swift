@@ -65,9 +65,7 @@ extension CircularArray where Element == Point {
         }
 
         /// A triangle is convex by nature.
-        guard count > 3 else {
-            return self
-        }
+        guard count > 3 else { return self }
 
         // Sort vertices lexicographically (first by x, then by y if necessary)
         let vertices = sorted { $0.x < $1.x || ($0.x == $1.x && $0.y < $1.y) }
@@ -99,22 +97,22 @@ extension CircularArray where Element == Point {
         return edges.map { $0.vector }
     }
 
-    /// - Returns: Array of triangles created with each adjacent triple of vertices.
-    public var triangles: [Triangle] {
-        return indices.map { index in
-            Triangle(vertices: self[from: index - 1, through: index + 1])
-        }
+    /// - Returns: Array of triplets of points created with each.
+    ///
+    /// FIXME: Consider implementing `triples` over `Sequence`, à la `pairs`.
+    public var triples: [Point.Triple] {
+        return indices.map { index in triple(self[from: index - 1, through: index + 1]) }
     }
 
     /// - Returns: Array of the angles of each adjacent triple of vertices.
     public var angles: [Angle] {
-        return triangles.map { $0.angle }
+        return triples.map(angle)
     }
 
     /// - Returns: `true` if the vertices contained herein form a convex polygon. Otherwise,
     /// `false`.
     public var formConvexPolygon: Bool {
-        return triangles.map { $0.crossProduct.sign }.isHomogeneous
+        return triples.lazy.map(crossProduct).map { $0.sign }.isHomogeneous
     }
 
     /// - Returns: Wheter vertices are arranged in a clockwise or counterclockwise fasion.

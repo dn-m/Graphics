@@ -6,6 +6,12 @@
 //
 //
 
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin.C
+#endif
+
 import DataStructures
 import Algorithms
 import Algebra
@@ -33,20 +39,21 @@ public struct Polygon: PolygonProtocol {
         /// - Returns: `true` if the given `triangle` is valid for clipping off.
         ///
         /// A triangle is valid for cipping if it satisfies two requirements:
+        ///
         /// - It is convex, given the order of traversal.
         /// - There are no remaining vertices contained within its area.
         ///
-        func isEar(_ triangle: Triangle, remainingVertices: [Point]) -> Bool {
-            guard triangle.isConvex(rotation: .counterClockwise) else { return false }
-            guard !triangle.contains(anyOf: remainingVertices) else { return false }
+        func isEar(_ triple: Point.Triple, remainingVertices: [Point]) -> Bool {
+            guard Geometry.isConvex(triple, traversing: .counterClockwise) else { return false }
+            guard !Triangle(triple).contains(anyOf: remainingVertices) else { return false }
             return true
         }
 
         /// - Returns: A triangle, if valid for clipping. Otherwise, `nil`.
         func ear(at index: Int, of vertices: VertexCollection) -> Triangle? {
-            let triangle = Triangle(vertices: vertices[from: index - 1, through: index + 1])
+            let t = triple(vertices[from: index - 1, through: index + 1])
             let remainingVertices = vertices[after: index + 1, upTo: index - 1]
-            return isEar(triangle, remainingVertices: remainingVertices) ? triangle : nil
+            return isEar(t, remainingVertices: remainingVertices) ? Triangle(t) : nil
         }
 
         /// Attempts to clip off an ear at the given `index`, from the given `vertices`.
@@ -61,8 +68,7 @@ public struct Polygon: PolygonProtocol {
 
             // Base case: If there are only three vertices left, we have the last triangle!
             guard vertices.count > 3 else {
-                let ear = Triangle(vertices: vertices[from: index - 1, through: index + 1])
-                return ears + ear
+                return ears + Triangle(vertices: vertices[from: index - 1, through: index + 1])
             }
 
             // If no ear found at current index, continue on to the next vertex.
@@ -139,5 +145,42 @@ extension Polygon: CustomStringConvertible {
     /// Print the vertices in order of their appearance
     public var description: String {
         return "Polygon<\(vertices.count)>[" + vertices.map { "\($0)" }.joined(separator: ", ") + "]"
+    }
+}
+
+extension Point {
+    public typealias Triple = (Point,Point,Point)
+}
+
+/// - Returns: A triple of points from the given array.
+///
+/// - Warning: There must be 3 points in the given `vertices`
+func triple(_ vertices: [Point]) -> Point.Triple {
+    return (vertices[0],vertices[1],vertices[2])
+}
+
+/// - Returns: The `Angle` of the given `vertices`, with the second of the triple being the point
+/// of reference.
+func angle(_ vertices: Point.Triple) -> Angle {
+    let (p1, center, p2) = vertices
+    let a = pow(center.x - p1.x, 2) + pow(center.y - p1.y, 2)
+    let b = pow(center.x - p2.x, 2) + pow(center.y - p2.y, 2)
+    let c = pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2)
+    return Angle(radians: acos((a + b - c) / sqrt(4 * a * b)))
+}
+
+func isConvex(_ triplet: Point.Triple, traversing rotation: Rotation) -> Bool {
+    let cp = crossProduct(triplet)
+    return rotation == .clockwise ? cp > 0 : cp < 0
+}
+
+private func crossProduct(_ triplet: Point.Triple) -> Double {
+    let (a,b,c) = triplet
+    return ((a.x * (c.y - b.y)) + (b.x * (a.y - c.y)) + (c.x * (b.y - a.y)))
+}
+
+extension Triangle {
+    init(_ triple: Point.Triple) {
+        self.init(triple.0,triple.1,triple.2)
     }
 }
