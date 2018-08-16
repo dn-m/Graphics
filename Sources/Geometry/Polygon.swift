@@ -169,7 +169,7 @@ func angle(_ vertices: Point.Triple) -> Angle {
     return Angle(radians: acos((a + b - c) / sqrt(4 * a * b)))
 }
 
-private func isConvex(_ triplet: Point.Triple, traversing rotation: Rotation) -> Bool {
+func isConvex(_ triplet: Point.Triple, traversing rotation: Rotation) -> Bool {
     let cp = crossProduct(triplet)
     return rotation == .clockwise ? cp > 0 : cp < 0
 }
