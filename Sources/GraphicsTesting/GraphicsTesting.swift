@@ -13,14 +13,19 @@ import QuartzAdapter
 import Foundation
 import Rendering
 
+/// The URL of the directory where the graphics test artifacts of all tests will be generated.
 let artifactsDirectory: URL = Bundle.main.bundleURL
     .deletingLastPathComponent()
     .appendingPathComponent("Artifacts")
 
+/// The URL of the directory where the graphics test artifacts for the given `testName` will be
+/// generated.
 func testCaseDirectory(for testName: String) -> URL {
     return artifactsDirectory.appendingPathComponent(testName)
 }
 
+/// Creates the directory where the graphics test artifacts for the given `testName` will be
+/// generated.
 func createArtifactsDirectory(for testName: String) throws {
     try FileManager.default.createDirectory(
         at: testCaseDirectory(for: testName),
@@ -29,10 +34,12 @@ func createArtifactsDirectory(for testName: String) throws {
     )
 }
 
+/// Opens the artifacts directory in the finder for easy visual perusing.
 func openArtifactsDirectory() {
     _ = shell("open", artifactsDirectory.absoluteString)
 }
 
+/// Runs the given bash `args`.
 private func shell(_ args: String...) -> Int32 {
     let task = Process()
     task.launchPath = "/usr/bin/env"
@@ -42,6 +49,7 @@ private func shell(_ args: String...) -> Int32 {
     return task.terminationStatus
 }
 
+/// If running on macOS, create a PDF with the given `Composite` graphical object.
 func render(_ composite: Composite, testName: String, fileName: String) {
     #if os(OSX)
     let layer = CALayer(composite)
