@@ -234,6 +234,35 @@ class CompositeTests: XCTestCase {
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
 
+    func testBezierCurveRedDotsLinearT() {
+        let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
+        let group = Group(frame: frame)
+        let curve = BezierCurve(
+            start: Point(x: 0, y: 100),
+            control1: Point(x: 50, y: 100),
+            control2: Point(x: 50, y: 0),
+            end: Point(x: 100, y: 0)
+        )
+        let dots = stride(from: 0.0, through: 1, by: 0.1).map { t -> StyledPath.Composite in
+            let dotPath = Path.circle(center: curve[t], radius: 2)
+            let styledDotPath = StyledPath(
+                frame: frame,
+                path: dotPath,
+                styling: Styling(fill: Fill(color: .red))
+            )
+            return .leaf(Item.path(styledDotPath))
+        }
+
+        let path = Path(curve)
+        let styledPath = StyledPath(
+            frame: frame,
+            path: path,
+            styling: Styling(stroke: Stroke(color: .black))
+        )
+        let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
+        render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+    }
+
     func testBezierCurveRedDotsLinearX() {
         let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
         let group = Group(frame: frame)
@@ -264,7 +293,7 @@ class CompositeTests: XCTestCase {
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
 
-    func testBezierCurveRedDotsLinearT() {
+    func testBezierCurveRedDotsLinearY() {
         let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
         let group = Group(frame: frame)
         let curve = BezierCurve(
@@ -273,8 +302,10 @@ class CompositeTests: XCTestCase {
             control2: Point(x: 50, y: 0),
             end: Point(x: 100, y: 0)
         )
-        let dots = stride(from: 0.0, through: 1, by: 0.1).map { t -> StyledPath.Composite in
-            let dotPath = Path.circle(center: curve[t], radius: 2)
+        let dots = stride(from: 0.0, through: 100, by: 10).map { y -> StyledPath.Composite in
+            let xs = curve.xs(y: y)
+            let x = xs.filter { (0...100).contains($0) }.first!
+            let dotPath = Path.circle(center: Point(x: x,y: y), radius: 2)
             let styledDotPath = StyledPath(
                 frame: frame,
                 path: dotPath,
