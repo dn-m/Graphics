@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/drmohundro/SWXMLHash", from: "4.1.1"),
-        .package(url: "https://github.com/dn-m/Math", from: "0.2.0"),
+        .package(url: "https://github.com/dn-m/Math", from: "0.4.0"),
         .package(url: "https://github.com/dn-m/Structure", from: "0.5.1")
     ],
     targets: [
