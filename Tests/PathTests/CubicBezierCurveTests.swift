@@ -170,6 +170,36 @@ class CubicBezierCurveTests: XCTestCase {
         ])
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
+
+    func testBoundingBoxRender() {
+        let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
+        let group = Group(frame: frame)
+        let curve = BezierCurve(
+            start: Point(x: 24, y: 82),
+            control1: Point(x: 40, y: 90),
+            control2: Point(x: 90, y: 9),
+            end: Point(x: 100, y: 100)
+        )
+        let curvePath = Path(curve)
+        let styledCurve = StyledPath(
+            frame: frame,
+            path: curvePath,
+            styling: Styling(stroke: Stroke(color: .black))
+        )
+        let box = curve.axisAlignedBoundingBox
+        let boxPath = Path.rectangle(box)
+        let styledBox = StyledPath(
+            frame: frame,
+            path: boxPath,
+            styling: Styling(stroke: Stroke(color: .red))
+        )
+
+        let composite: StyledPath.Composite = .branch(group, [
+            .leaf(.path(styledBox)),
+            .leaf(.path(styledCurve))
+        ])
+        render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+    }
 }
 
 /// - TODO: Move to `dn-m/ArithmeticTools`.
