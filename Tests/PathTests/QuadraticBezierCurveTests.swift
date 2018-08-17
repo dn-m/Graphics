@@ -147,9 +147,26 @@ class QuadraticBezierCurveTests: XCTestCase {
             control: Point(x: 25, y: 75),
             end: Point(x: 100, y: 100)
         )
-        let dots = stride(from: 0.0, through: 100, by: 10).map { y -> StyledPath.Composite in
+
+        let xs = stride(from: 0.0, through: 100, by: 10)
+        let ys = xs.map { x in curve.ys(x: x) }
+        let expected: [Set<Double>] = [
+            [0.0],
+            [24.164078649987374],
+            [41.24515496597099],
+            [54.39088914585775],
+            [64.93901531919198],
+            [73.60679774997897],
+            [80.8318915758459],
+            [86.90465157330259],
+            [92.02941017470886],
+            [96.35642126552706],
+            [100.0]
+        ]
+        XCTAssertEqual(ys, expected)
+
+        let dots = zip(xs,ys.compactMap { $0.first }).map { x,y -> StyledPath.Composite in
             let xs = curve.xs(y: y)
-            print("y: \(y), xs: \(xs)")
             let x = xs.first ?? 0
             let dotPath = Path.circle(center: Point(x: x,y: y), radius: 2)
             let styledDotPath = StyledPath(
