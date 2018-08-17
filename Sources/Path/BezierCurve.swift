@@ -161,10 +161,7 @@ extension BezierCurve {
         case .linear:
             return [(x - start.x) * (end.x - start.x)]
         case .quadratic:
-            let c = start
-            let b = 2 * (points[1] - start)
-            let a = start - 2 * points[1] + end
-            return quadratic(a.x, b.x, c.x - x).filter((0...1).contains)
+            return ts(for: \.y, at: y)
         case .cubic:
             return cardano(points: points, line: .vertical(at: x))
         }
@@ -176,10 +173,7 @@ extension BezierCurve {
         case .linear:
             return [(y - start.y) * (end.y - start.y)]
         case .quadratic:
-            let c = start
-            let b = 2 * (points[1] - start)
-            let a = start - 2 * points[1] + end
-            return quadratic(a.y, b.y, c.y - y).filter((0...1).contains)
+            return ts(for: \.y, at: y)
         case .cubic:
             return cardano(points: points, line: .horizontal(at: y))
         }
@@ -238,6 +232,18 @@ extension BezierCurve {
     /// `reference` point.
     public func rotated(by angle: Angle, around reference: Point = Point()) -> BezierCurve {
         return BezierCurve(points.map { $0.rotated(by: angle, around: reference) })
+    }
+
+    private func ts(for keyPath: KeyPath<Point,Double>, at position: Double) -> Set<Double> {
+        let c = start
+        let b = 2 * (points[1] - start)
+        let a = start - 2 * points[1] + end
+        let solutions = quadratic(
+            a[keyPath: keyPath],
+            b[keyPath: keyPath],
+            c[keyPath: keyPath] - position
+        )
+        return solutions.filter((0...1).contains)
     }
 }
 
