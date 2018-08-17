@@ -258,6 +258,39 @@ class CubicBezierCurveTests: XCTestCase {
         ])
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
+
+    func testScaledRender() {
+        let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
+        let group = Group(frame: frame)
+        let curve = BezierCurve(
+            start: Point(x: 40, y: 40),
+            control1: Point(x: 0, y: 60),
+            control2: Point(x: 60, y: 0),
+            end: Point(x: 60, y: 60)
+        )
+        let curvePath = Path(curve)
+        let styledCurve = StyledPath(
+            frame: frame,
+            path: curvePath,
+            styling: Styling(stroke: Stroke(color: .lightGray))
+        )
+        let referencePoint = Point(x: 25, y: 50)
+        let scaled = curve.scaled(by: 2, from: referencePoint)
+        let scaledPath = Path(scaled)
+        let styledScaled = StyledPath(
+            frame: frame,
+            path: scaledPath,
+            styling: Styling(stroke: Stroke(color: .red))
+        )
+        let dot = Path.circle(center: referencePoint, radius: 2)
+        let styledDot = StyledPath(path: dot, styling: Styling(fill: Fill(color: .red)))
+        let composite: StyledPath.Composite = .branch(group, [
+            .leaf(.path(styledCurve)),
+            .leaf(.path(styledScaled)),
+            .leaf(.path(styledDot))
+        ])
+        render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+    }
 }
 
 /// - TODO: Move to `dn-m/ArithmeticTools`.
