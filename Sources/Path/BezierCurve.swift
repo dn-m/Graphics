@@ -161,7 +161,7 @@ extension BezierCurve {
         case .linear:
             return [(x - start.x) * (end.x - start.x)]
         case .quadratic:
-            return ts(for: \.y, at: y)
+            return ts(for: \.x, at: x)
         case .cubic:
             return cardano(points: points, line: .vertical(at: x))
         }
