@@ -181,22 +181,12 @@ extension BezierCurve {
 
     /// - Returns: Vertical positions for the given `x`.
     public func ys(x: Double) -> Set<Double> {
-        switch order {
-        case .linear:
-            return [start.y + ((x - start.x) / (end.x - start.x)) * (end.y - start.y)]
-        case .quadratic, .cubic:
-            return Set(ts(x: x).map { t in self[t].y })
-        }
+       return Set(ts(x: x).map { t in self[t].y })
     }
 
     /// - Returns: Horizontal positions for the given `y`.
     public func xs(y: Double) -> Set<Double> {
-        switch order {
-        case .linear:
-            return [start.x + ((y - start.y) / (end.y - start.y)) * (end.x - start.x)]
-        case .quadratic, .cubic:
-            return Set(ts(y: y).map { t in self[t].x })
-        }
+        return Set(ts(y: y).map { t in self[t].x })
     }
 
     /// - Returns: `BezierCurve` translated by the given `point`.
