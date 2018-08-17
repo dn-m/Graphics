@@ -84,4 +84,3 @@ func cardano(points: [Point], line: Line.Segment) -> Set<Double> {
         return [x1]
     }
 }
-
