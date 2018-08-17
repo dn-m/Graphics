@@ -24,17 +24,4 @@ func quadratic(_ a: Double, _ b: Double, _ c: Double) -> Set<Double> {
     let val1 = (-b - sqrt(discriminant)) / (2 * a)
 
     return [val0,val1]
-//
-//    var result: Set<Double> = []
-//
-//    // This differs from the more generic version. Find a way to do this cleansing after?
-//    if val0 <= 1 {
-//        result.insert(val0)
-//    }
-//
-//    if (0...1).contains(val1) {
-//        result.insert(val1)
-//    }
-//
-//    return result
 }
