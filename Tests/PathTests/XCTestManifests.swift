@@ -49,8 +49,9 @@ extension PathTests {
 
 extension QuadraticBezierCurveTests {
     static let __allTests = [
-        ("testXsAtY", testXsAtY),
-        ("testYsAtX", testYsAtX),
+        ("testBezierCurveTsAtX", testBezierCurveTsAtX),
+        ("testBezierCurveTsAtY", testBezierCurveTsAtY),
+        ("testBezierCurveXsAtY", testBezierCurveXsAtY),
     ]
 }
 

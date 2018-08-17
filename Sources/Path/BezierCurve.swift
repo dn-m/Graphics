@@ -79,49 +79,57 @@ public struct BezierCurve {
         case .linear:
             return Line.Segment(points: points).length
         case .quadratic, .cubic:
-            let points = stride(from: 0, through: 1, by: 0.01).map { t in self[t] }
-            let lines = points.pairs.map(Line.Segment.init)
-            return lines.map { $0.length }.sum
+            return stride(from: 0, through: 1, by: 0.01).lazy
+                .map { t in self[t] }
+                .pairs.map(Line.Segment.init)
+                .map { $0.length }
+                .sum
         }
     }
 
     /// The control points defining a Bézier curve.
     public let points: [Point]
-    
+}
+
+extension BezierCurve {
+
     // MARK: - Initializers
-    
+
     /// Creates a linear `BezierCurve` with the given `start` and `end` points.
     public init(start: Point, end: Point) {
         self.points = [start, end]
     }
-    
+
     /// Creates a linear `BezierCurve` with the given `line`.
     public init(_ line: Line.Segment) {
         self.init(start: line.start, end: line.end)
     }
-    
+
     /// Creates a quadratic `BezierCurve` with the given `start`, `control` and `end` points.
     public init(start: Point, control: Point, end: Point) {
         self.points = [start, control, end]
     }
-    
+
     /// Creates a cubic `BezierCurve` with the given `start`, control and `end` points.
     public init(start: Point, control1: Point, control2: Point, end: Point) {
         self.points = [start, control1, control2, end]
     }
-    
+
     /// Creates a `BezierCurve` with the given points.
     internal init(_ points: [Point]) {
-        
+
         guard (2...4).contains(points.count) else {
             fatalError("Bézier curves with \(points.count) control points not supported!")
         }
-        
+
         self.points = points
     }
-    
+}
+
+extension BezierCurve {
+
     // MARK: - Subscripts
-    
+
     /// - Returns: `Point` at the given `t` value.
     public subscript (t: Double) -> Point {
         switch order {
@@ -141,67 +149,58 @@ public struct BezierCurve {
             )
         }
     }
-    
+}
+
+extension BezierCurve {
+
+    // MARK: - Instance Methods
+
     /// - Returns: `t` values for the given `x`.
     public func ts(x: Double) -> Set<Double> {
         switch order {
         case .linear:
             return [(x - start.x) * (end.x - start.x)]
         case .quadratic:
-            let control = points[1]
             let c = start
-            let b = 2 * (control - start)
-            let a = start - 2 * control + end
-            return quadratic(a, b, c, \.x)
+            let b = 2 * (points[1] - start)
+            let a = start - 2 * points[1] + end
+            return quadratic(a.x, b.x, c.x - x)
         case .cubic:
             return cardano(points: points, line: .vertical(at: x))
         }
     }
-    
+
     /// - Returns: `t` values for the given `y`.
     public func ts(y: Double) -> Set<Double> {
         switch order {
         case .linear:
             return [(y - start.y) * (end.y - start.y)]
         case .quadratic:
-            let control = points[1]
             let c = start
-            let b = 2 * (control - start)
-            let a = start - 2 * control + end
-            return quadratic(a, b, c, \.y)
+            let b = 2 * (points[1] - start)
+            let a = start - 2 * points[1] + end
+            return quadratic(a.y, b.y, c.y - y)
         case .cubic:
             return cardano(points: points, line: .horizontal(at: y))
         }
     }
-    
+
     /// - Returns: Vertical positions for the given `x`.
     public func ys(x: Double) -> Set<Double> {
         switch order {
         case .linear:
             return [start.y + ((x - start.x) / (end.x - start.x)) * (end.y - start.y)]
-        case .quadratic:
-            let control = points[1]
-            let c = start
-            let b = 2 * (control - start)
-            let a = start - 2 * control + end
-            return Set(quadratic(a.x, b.x, c.x - x).map { self[$0].y })
-        case .cubic:
+        case .quadratic, .cubic:
             return Set(ts(x: x).map { t in self[t].y })
         }
     }
-    
+
     /// - Returns: Horizontal positions for the given `y`.
     public func xs(y: Double) -> Set<Double> {
         switch order {
         case .linear:
             return [start.x + ((y - start.y) / (end.y - start.y)) * (end.x - start.x)]
-        case .quadratic:
-            let control = points[1]
-            let c = start
-            let b = 2 * (control - start)
-            let a = start - 2 * control + end
-            return Set(quadratic(a.y, b.y, c.y - y).map { self[$0].x })
-        case .cubic:
+        case .quadratic, .cubic:
             return Set(ts(y: y).map { t in self[t].x })
         }
     }
@@ -210,51 +209,35 @@ public struct BezierCurve {
     public func translated(by point: Point) -> BezierCurve {
         return BezierCurve(points.map { $0.translated(by: point) })
     }
-    
+
     /// - Returns: `BezierCurve` translated by the given `x` and `y` values.
     public func translatedBy(x: Double = 0, y: Double = 0) -> BezierCurve {
         return translated(by: Point(x: x, y: y))
     }
-    
+
     /// - Returns: Two `BezierCurve` values of the same order as `self`, split at the given `t`
     /// value.
     public func split(t: Double) -> (BezierCurve, BezierCurve) {
-        return map(BezierCurve.split(controlPoints: points, at: t)) { BezierCurve($0) }
+        return map(splitCurve(controlPoints: points, at: t)) { BezierCurve($0) }
     }
-    
+
     /// - Returns: Array of `Point` values.
     public func simplified(segmentCount: Int) -> [Point] {
         if order == .linear { return [start, end] }
         let segment = 1 / Double(segmentCount)
         return stride(from: 0, through: 1, by: segment).map { t in self[t] }
     }
-    
-    /// - Returns: `BezierCurve` which is scaled by the given `amount` from the given 
+
+    /// - Returns: `BezierCurve` which is scaled by the given `amount` from the given
     /// `reference` point.
     public func scaled(by amount: Double, from reference: Point = Point()) -> BezierCurve {
         return BezierCurve(points.map { $0.scaled(by: amount, from: reference) })
     }
-    
+
     /// - Returns: `BezierCurve` which is rotated by the given `angle` around the given
     /// `reference` point.
     public func rotated(by angle: Angle, around reference: Point = Point()) -> BezierCurve {
         return BezierCurve(points.map { $0.rotated(by: angle, around: reference) })
-    }
-
-    /// - Returns: Splits an arbitrarily-highly-ordered at the given `t` value into two Bézier
-    /// paths of the same order.
-    public static func split(controlPoints: [Point], at t: Double) -> ([Point], [Point]) {
-
-        func split(points: [Point], at t: Double, into left: [Point], and right: [Point])
-            -> ([Point], [Point])
-        {
-            guard points.count > 1 else { return (left + [points.first!], right + [points.first!]) }
-            let left = left + [points.first!]
-            let right = right + [points.last!]
-            let points = points.pairs.map { (a: Point, b: Point) -> Point in (1-t) * a + t * b }
-            return split(points: points, at: t, into: left, and: right)
-        }
-        return split(points: controlPoints, at: t, into: [], and: [])
     }
 }
 
@@ -272,121 +255,6 @@ extension BezierCurve {
 
 extension BezierCurve: Equatable { }
 
-extension BezierCurve {
-    /// - Returns: Coefficients for quadratic ONLY!
-    private var coeffs: (Point,Point,Point) {
-        let control = points[1]
-        let c = start
-        let b = 2 * (control - start)
-        let a = start - 2 * control + end
-        return (a,b,c)
-    }
-}
-
-private func quadratic(_ a: Point, _ b: Point, _ c: Point, _ keyPath: KeyPath<Point,Double>) -> Set<Double> {
-    return quadratic(a[keyPath: keyPath], a[keyPath: keyPath], a[keyPath: keyPath])
-}
-
-/// - returns: A `Set` of 0, 1, or 2 x-intercepts for the given coefficients.
-///
-/// - TODO: Update in dn-m/Math
-public func quadratic(_ a: Double, _ b: Double, _ c: Double) -> Set<Double> {
-    
-    let discriminant = pow(b,2) - (4 * a * c)
-    
-    guard discriminant >= 0 else {
-        return Set()
-    }
-    
-    let val0 = (-b + sqrt(discriminant)) / (2 * a)
-    let val1 = (-b - sqrt(discriminant)) / (2 * a)
-    
-    var result: Set<Double> = []
-    
-    // This differs from the more generic version. Find a way to do this cleansing after?
-    if val0 <= 1 {
-        result.insert(val0)
-    }
-    
-    if (0...1).contains(val1) {
-        result.insert(val1)
-    }
-    
-    return result
-}
-
-/// - TODO: Move somewhere meaningful, perhaps in a `Constant` enum.
-let tau: Double = 2 * .pi
-
-/// - TODO: Move somewhere meaningful.
-func cubeRoot(_ value: Double) -> Double {
-    return value > 0 ? pow(value, 1/3) : -pow(-value, 1/3)
-}
-
-/// - Returns: The `t` values intersecting where the given `curve` intersects the given line.
-///
-/// - Author: Pomax
-/// - See: http://jsbin.com/payifoxeho/edit?html,css,js
-/// - Note: Cardano's algorithm, based on
-/// http://www.trans4mind.com/personal_development/mathematics/polynomials/cubicAlgebra.htm.
-///
-///
-/// - TODO: Use `Line` instead of `Line.Segment`.
-///
-func cardano(points: [Point], line: Line.Segment) -> Set<Double> {
-    
-    func align(points: [Point], with line: Line.Segment) -> [Point] {
-        let a = -atan2(line.end.y - line.start.y, line.end.x - line.start.x)
-        return points.map { point in
-            Point(
-                x: (point.x - line.start.x) * cos(a) - (point.y - line.start.y) * sin(a),
-                y: (point.x - line.start.x) * sin(a) + (point.y - line.start.y) * cos(a)
-            )
-        }
-    }
-    
-    let aligned = align(points: points, with: line)
-    
-    let pa = aligned[0].y
-    let pb = aligned[1].y
-    let pc = aligned[2].y
-    let pd = aligned[3].y
-    
-    let d = (-pa + 3 * pb - 3 * pc + pd)
-    let c = pa / d
-    let b = (-3 * pa + 3 * pb) / d
-    let a = (3 * pa - 6 * pb + 3 * pc) / d
-    
-    let p = (3 * b - a * a) / 3
-    let p3 = p / 3
-    let q = (2 * pow(a,3) - 9 * a * b + 27 * c) / 27
-    let q2 = q / 2
-    let discriminant = pow(q2, 2) + pow(p3, 3)
-    
-    if discriminant < 0 {
-        let mp3 = -p / 3
-        let mp33 = pow(mp3,3)
-        let r = sqrt(mp33)
-        let t = -q / (2 * r)
-        let cosphi = t < -1 ? -1 : t > 1 ? 1 : t
-        let phi = acos(cosphi)
-        let t1 = 2 * cubeRoot(r)
-        let x1 = t1 * cos(phi / 3) - a / 3
-        let x2 = t1 * cos((phi + tau) / 3) - a / 3
-        let x3 = t1 * cos((phi + 2 * tau) / 3) - a / 3
-        return [x1, x2, x3]
-    } else if discriminant == 0 {
-        let u1 = q2 < 0 ? cubeRoot(-q2) : -cubeRoot(q2)
-        let x1 = 2 * u1 - a / 3
-        let x2 = -u1 - a / 3
-        return [x1, x2]
-    } else {
-        let sd = sqrt(discriminant)
-        let x1 = cubeRoot(-q2 + sd) - cubeRoot(q2 + sd) - a / 3
-        return [x1]
-    }
-}
-
 extension BezierCurve: CustomStringConvertible {
 
     public var description: String {
@@ -399,6 +267,22 @@ extension BezierCurve: CustomStringConvertible {
             return "Cube: \(points[0]) -> \(points[1]) -> \(points[2]) -> \(points[3]))"
         }
     }
+}
+
+/// - Returns: Splits an arbitrarily-highly-ordered Bezier curve at the given `t` value into two
+/// paths of the same order.
+func splitCurve(controlPoints: [Point], at t: Double) -> ([Point], [Point]) {
+
+    func split(points: [Point], at t: Double, into left: [Point], and right: [Point])
+        -> ([Point], [Point])
+    {
+        guard points.count > 1 else { return (left + [points.first!], right + [points.first!]) }
+        let left = left + [points.first!]
+        let right = right + [points.last!]
+        let points = points.pairs.map { (a: Point, b: Point) -> Point in (1-t) * a + t * b }
+        return split(points: points, at: t, into: left, and: right)
+    }
+    return split(points: controlPoints, at: t, into: [], and: [])
 }
 
 extension Array {
@@ -414,6 +298,4 @@ extension Array {
         }
         return (t,u)
     }
-
 }
-
