@@ -164,7 +164,7 @@ extension BezierCurve {
             let c = start
             let b = 2 * (points[1] - start)
             let a = start - 2 * points[1] + end
-            return quadratic(a.x, b.x, c.x - x)
+            return quadratic(a.x, b.x, c.x - x).filter((0...1).contains)
         case .cubic:
             return cardano(points: points, line: .vertical(at: x))
         }
@@ -179,7 +179,7 @@ extension BezierCurve {
             let c = start
             let b = 2 * (points[1] - start)
             let a = start - 2 * points[1] + end
-            return quadratic(a.y, b.y, c.y - y)
+            return quadratic(a.y, b.y, c.y - y).filter((0...1).contains)
         case .cubic:
             return cardano(points: points, line: .horizontal(at: y))
         }

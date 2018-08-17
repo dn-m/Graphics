@@ -33,10 +33,25 @@ class QuadraticBezierCurveTests: XCTestCase {
             control: Point(x: 0, y: 100),
             end: Point(x: 100, y: 100)
         )
-        let dots = stride(from: 0.0, through: 100, by: 10).map { x -> StyledPath.Composite in
+        let xs = stride(from: 0.0, through: 100, by: 10)
+        let ts = xs.map { x in curve.ts(x: x) }
+        let expected: [Set<Double>] = [
+            [0.0],
+            [0.31622776601683794],
+            [0.447213595499958],
+            [0.5477225575051662],
+            [0.6324555320336759],
+            [0.7071067811865476],
+            [0.7745966692414834],
+            [0.8366600265340756],
+            [0.894427190999916],
+            [0.9486832980505138],
+            [1.0]
+        ]
+        XCTAssertEqual(ts, expected)
 
-            let t = curve.ts(x: x).first ?? 0
-            let y = curve[t].y
+        let ys = ts.compactMap { $0.first }.map { t in curve[t].y }
+        let dots = zip(xs,ys).map { x,y -> StyledPath.Composite in
 
             // Add lines for each `y` value
             let linePath = Path.line(from: Point(x: x, y: 0), to: Point(x: x, y: 100))
