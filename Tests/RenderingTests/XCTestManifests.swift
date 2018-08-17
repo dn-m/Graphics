@@ -18,6 +18,11 @@ extension ColorTests {
 
 extension CompositeTests {
     static let __allTests = [
+        ("testBezierCurveBottomLeftTopRightEaseInEaseOut", testBezierCurveBottomLeftTopRightEaseInEaseOut),
+        ("testBezierCurveRedDotsLinearT", testBezierCurveRedDotsLinearT),
+        ("testBezierCurveRedDotsLinearX", testBezierCurveRedDotsLinearX),
+        ("testBezierCurveRedDotsLinearY", testBezierCurveRedDotsLinearY),
+        ("testBezierCurveTopLeftBottomRightEaseInEaseOut", testBezierCurveTopLeftBottomRightEaseInEaseOut),
         ("testBranchAllZeroFramedLeaves", testBranchAllZeroFramedLeaves),
         ("testBranchAllZeroFramedLeavesButNonZeroGroup", testBranchAllZeroFramedLeavesButNonZeroGroup),
         ("testLeafAxisAlignedBoundingBox", testLeafAxisAlignedBoundingBox),
