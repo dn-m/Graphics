@@ -110,8 +110,6 @@ class QuadraticBezierCurveTests: XCTestCase {
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
 
-
-
     func testBezierCurveXsAtY() {
         let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
         let group = Group(frame: frame)

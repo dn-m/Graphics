@@ -8,9 +8,19 @@
 
 import XCTest
 import Geometry
+import Rendering
+import GraphicsTesting
 @testable import Path
 
 class CubicBezierCurveTests: XCTestCase {
+
+    override func setUp() {
+        createArtifactsDirectory(for: "\(type(of: self))")
+    }
+
+    override func tearDown() {
+        openArtifactsDirectory()
+    }
     
     func testUpAndDown() {
 
@@ -127,6 +137,38 @@ class CubicBezierCurveTests: XCTestCase {
         
         let simple = upAndDown.simplified(segmentCount: 100)
         print(simple)
+    }
+
+    func testSplitRender() {
+        let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
+        let group = Group(frame: frame)
+        let curve = BezierCurve(
+            start: Point(x: 0, y: 0),
+            control1: Point(x: 0, y: 100),
+            control2: Point(x: 100, y: 0),
+            end: Point(x: 100, y: 100)
+        )
+
+        let (a,b) = curve.split(t: 0.75)
+
+        let pathA = Path(a)
+        let styledPathA = StyledPath(
+            frame: frame,
+            path: pathA,
+            styling: Styling(stroke: Stroke(color: .red))
+        )
+
+        let pathB = Path(b)
+        let styledPathB = StyledPath(
+            frame: frame,
+            path: pathB,
+            styling: Styling(stroke: Stroke(color: .green))
+        )
+        let composite: StyledPath.Composite = .branch(group, [
+            .leaf(.path(styledPathA)),
+            .leaf(.path(styledPathB))
+        ])
+        render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
 }
 
