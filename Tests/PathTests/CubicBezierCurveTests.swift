@@ -200,6 +200,36 @@ class CubicBezierCurveTests: XCTestCase {
         ])
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
+
+    func testTranslatedByRender() {
+        let frame = Rectangle(x: 0, y: 0, width: 100, height: 100)
+        let group = Group(frame: frame)
+        let curve = BezierCurve(
+            start: Point(x: 0, y: 0),
+            control1: Point(x: 0, y: 50),
+            control2: Point(x: 50, y: 0),
+            end: Point(x: 50, y: 50)
+        )
+        let translated = curve.translatedBy(x: 25, y: 25)
+        let curvePath = Path(curve)
+        let styledCurve = StyledPath(
+            frame: frame,
+            path: curvePath,
+            styling: Styling(stroke: Stroke(color: .black))
+        )
+
+        let translatedPath = Path(translated)
+        let styledTranslated = StyledPath(
+            frame: frame,
+            path: translatedPath,
+            styling: Styling(stroke: Stroke(color: .red))
+        )
+        let composite: StyledPath.Composite = .branch(group, [
+            .leaf(.path(styledCurve)),
+            .leaf(.path(styledTranslated))
+        ])
+        render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+    }
 }
 
 /// - TODO: Move to `dn-m/ArithmeticTools`.
