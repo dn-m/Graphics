@@ -235,9 +235,9 @@ extension BezierCurve {
     }
 
     private func ts(for keyPath: KeyPath<Point,Double>, at position: Double) -> Set<Double> {
-        let c = start
-        let b = 2 * (points[1] - start)
         let a = start - 2 * points[1] + end
+        let b = 2 * (points[1] - start)
+        let c = start
         let solutions = quadratic(
             a[keyPath: keyPath],
             b[keyPath: keyPath],
