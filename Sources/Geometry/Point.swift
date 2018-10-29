@@ -33,7 +33,7 @@ public struct Point {
         self.y = y
     }
 
-    // MARK: - Instance Properties
+    // MARK: - Instance Methods
 
     /// - Returns: The distance to the given `other` point.
     public func distance(to other: Point) -> Double {
@@ -64,6 +64,7 @@ public struct Point {
         return rotated + reference
     }
 
+    /// - Returns: `Point` reflected over the given `line`.
     public func reflected(over line: Line) -> Point {
         switch line {
         case .horizontal(let y):
@@ -80,6 +81,8 @@ public struct Point {
 }
 
 extension Point: Additive {
+    
+    // MARK: - Additive
 
     /// Additive identity.
     public static var zero: Point {
