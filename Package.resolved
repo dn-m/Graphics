@@ -5,9 +5,9 @@
         "package": "Math",
         "repositoryURL": "https://github.com/dn-m/Math",
         "state": {
-          "branch": null,
-          "revision": "044605330704860849ecebbe63d7c8854bc0c42e",
-          "version": "0.4.0"
+          "branch": "swift-5",
+          "revision": "4096d7d5a33f43c6e7b393926ba82d799050e365",
+          "version": null
         }
       },
       {
@@ -23,9 +23,9 @@
         "package": "Structure",
         "repositoryURL": "https://github.com/dn-m/Structure",
         "state": {
-          "branch": null,
-          "revision": "ec0c57807165e1d66a7dc74fb1c768b22ccfd209",
-          "version": "0.9.0"
+          "branch": "swift-5",
+          "revision": "8f67514cba950f60ee992a8d0996d4f11d9654b0",
+          "version": null
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/drmohundro/SWXMLHash",
         "state": {
           "branch": null,
-          "revision": "24698592b581aef2bdbfc86ce18695708038c624",
-          "version": "4.7.1"
+          "revision": "f43166a8e18fdd0857f29e303b1bb79a5428bca0",
+          "version": "4.9.0"
         }
       }
     ]
