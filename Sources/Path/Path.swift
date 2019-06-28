@@ -10,18 +10,18 @@ import Algebra
 import DataStructures
 import Geometry
 
-public struct Path {
+public struct Path: CollectionWrapping {
     
     // MARK: - Instance Properties
     
     public var isShape: Bool {
-        return curves.allSatisfy { curve in curve.order == .linear }
+        return base.allSatisfy { curve in curve.order == .linear }
     }
     
     /// - Returns: `true` if there are no non-`.close` elements contained herein. Otherwise,
     /// `false`.
     public var isEmpty: Bool {
-        return curves.isEmpty
+        return base.isEmpty
     }
     
     /// - Returns: The axis-aligned bounding box for `Path`.
@@ -30,10 +30,10 @@ public struct Path {
     /// quadratic and cubic Bézier curves, which may result in some inaccuracy for whacky curves.
     ///
     public var axisAlignedBoundingBox: Rectangle {
-        return curves.map { $0.axisAlignedBoundingBox }.nonEmptySum ?? .zero
+        return base.map { $0.axisAlignedBoundingBox }.nonEmptySum ?? .zero
     }
     
-    public let curves: [BezierCurve]
+    public let base: [BezierCurve]
     
     // MARK: - Initializers
 
@@ -44,7 +44,7 @@ public struct Path {
     
     /// Create a `Path` with the given `curves`.
     public init(_ curves: [BezierCurve]) {
-        self.curves = curves
+        self.base = curves
     }
     
     /// Create a `Path` with the given `pathElements`.
@@ -83,7 +83,7 @@ public struct Path {
     
     /// - Returns: Polygonal representation of the `Path`.
     public func simplified(segmentCount: Int) -> Polygon {
-        let vertices = curves.map { $0.simplified(segmentCount: segmentCount) }
+        let vertices = base.map { $0.simplified(segmentCount: segmentCount) }
         let (most, last) = vertices.split(at: vertices.count - 1)!
         let merged = most.flatMap { $0.dropLast() } + last.first!
         if merged.count == 2 {
@@ -93,10 +93,10 @@ public struct Path {
     }
 }
 
-extension Path: CollectionWrapping {
+extension Path {
 
-    public var base: [BezierCurve] {
-        return curves
+    public var curves: [BezierCurve] {
+        return base
     }
 }
 
@@ -107,7 +107,7 @@ extension Path: Additive {
 
     /// - Returns: New `Path` with elements of two paths.
     public static func + (lhs: Path, rhs: Path) -> Path {
-        return Path(lhs.curves + rhs.curves)
+        return Path(lhs.base + rhs.base)
     }
 }
 
@@ -120,7 +120,7 @@ extension Path: CustomStringConvertible {
     /// Printed description.
     public var description: String {
         var result = "Path:\n"
-        result += curves.map { "  - \($0)" }.joined(separator: "\n")
+        result += base.map { "  - \($0)" }.joined(separator: "\n")
         return result
     }
 }

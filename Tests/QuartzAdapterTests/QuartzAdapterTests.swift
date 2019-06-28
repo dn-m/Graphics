@@ -50,9 +50,9 @@ class PathTests: XCTest {
 
             .build()
 
-        XCTAssertEqual(sum.curves.count, withBuilder.curves.count)
+        XCTAssertEqual(sum.base.count, withBuilder.base.count)
         XCTAssertEqual(sum, withBuilder)
-        XCTAssertEqual(Path(withBuilder.cgPath).curves.count, withBuilder.curves.count)
+        XCTAssertEqual(Path(withBuilder.cgPath).base.count, withBuilder.base.count)
         XCTAssertEqual(Path(withBuilder.cgPath), withBuilder)
     }
 
@@ -68,7 +68,7 @@ class PathTests: XCTest {
 
     func testParallelograms() {
         let path = Path.parallelogram(center: Point(), height: 30, width: 100, slope: 0.5)
-        path.curves.forEach { print($0) }
+        path.base.forEach { print($0) }
         XCTAssertEqual(path, Path(path.cgPath))
     }
 }

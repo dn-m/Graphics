@@ -18,7 +18,7 @@ extension Path {
         
         let path = CGMutablePath()
         
-        guard let first = curves.first?.start else {
+        guard let first = base.first?.start else {
             return path
         }
         
@@ -26,7 +26,7 @@ extension Path {
         var last = first
         path.move(to: CGPoint(last))
 
-        for curve in curves {
+        for curve in base {
             
             // Manage closed subpath
             if curve.order == .linear, curve.end == subpathFirst {
