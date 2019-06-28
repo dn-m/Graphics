@@ -10,7 +10,8 @@ import Algebra
 import DataStructures
 import Geometry
 
-public struct Path: CollectionWrapping {
+public struct Path //: CollectionWrapping
+{
     
     // MARK: - Instance Properties
     
@@ -93,12 +94,12 @@ public struct Path: CollectionWrapping {
     }
 }
 
-extension Path {
-
-    public var curves: [BezierCurve] {
-        return base
-    }
-}
+//extension Path {
+//
+//    public var curves: [BezierCurve] {
+//        return base
+//    }
+//}
 
 extension Path: Additive {
 
