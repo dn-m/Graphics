@@ -69,23 +69,23 @@ class PathTests: XCTestCase {
         XCTAssertEqual(path, expected)
     }
 
-    func testSimplified() {
-
-        let path = Path.builder
-            .addCurve(
-                BezierCurve(
-                    start: Point(x: -1, y: 0),
-                    control1: Point(x: 0, y: 1),
-                    control2: Point(x: 0, y: -1),
-                    end: Point(x: 1, y: 0)
-                )
-            )
-            .addLine(to: Point(x: 0, y: 1))
-            .addQuadCurve(to: Point(x: -1, y: 0), control: Point(x: -1, y: 0))
-            .build()
-
-        let simplified = path.simplified(segmentCount: 50)
-        #warning("TODO: Add assertion in PathTests.testSimplified()")
-        // TODO: Add assertion
-    }
+//    func testSimplified() {
+//
+//        let path = Path.builder
+//            .addCurve(
+//                BezierCurve(
+//                    start: Point(x: -1, y: 0),
+//                    control1: Point(x: 0, y: 1),
+//                    control2: Point(x: 0, y: -1),
+//                    end: Point(x: 1, y: 0)
+//                )
+//            )
+//            .addLine(to: Point(x: 0, y: 1))
+//            .addQuadCurve(to: Point(x: -1, y: 0), control: Point(x: -1, y: 0))
+//            .build()
+//
+//        let simplified = path.simplified(segmentCount: 50)
+//        #warning("TODO: Add assertion in PathTests.testSimplified()")
+//        // TODO: Add assertion
+//    }
 }
