@@ -15,31 +15,12 @@ public struct Path: CollectionWrapping
     
     public typealias Base = [BezierCurve]
     
-    // MARK: - Instance Properties
-    
-    public var isShape: Bool {
-        return base.allSatisfy { curve in curve.order == .linear }
-    }
-    
-    /// - Returns: `true` if there are no non-`.close` elements contained herein. Otherwise,
-    /// `false`.
-    public var isEmpty: Bool {
-        return base.isEmpty
-    }
-    
-    /// - Returns: The axis-aligned bounding box for `Path`.
-    ///
-    /// - Warning: This uses a simplification technique for calculateing the bounding boxes of
-    /// quadratic and cubic Bézier curves, which may result in some inaccuracy for whacky curves.
-    ///
-    public var axisAlignedBoundingBox: Rectangle {
-        return base.map { $0.axisAlignedBoundingBox }.nonEmptySum ?? .zero
-    }
-    
     public let base: [BezierCurve]
-    
-    // MARK: - Initializers
+}
 
+extension Path {
+    // MARK: - Initializers
+    
     /// Create a `Path` with a single `curve`.
     public init(_ curve: BezierCurve) {
         self.init([curve])
@@ -55,9 +36,9 @@ public struct Path: CollectionWrapping
         
         guard
             let (head, tail) = pathElements.destructured, case let .move(start) = head
-        else {
-            self = Path([])
-            return
+            else {
+                self = Path([])
+                return
         }
         
         let builder = Path.builder.move(to: start)
@@ -81,6 +62,33 @@ public struct Path: CollectionWrapping
         
         self = builder.build()
     }
+}
+
+extension Path {
+    
+    // MARK: - Instance Properties
+    
+    public var isShape: Bool {
+        return base.allSatisfy { curve in curve.order == .linear }
+    }
+    
+    /// - Returns: `true` if there are no non-`.close` elements contained herein. Otherwise,
+    /// `false`.
+    public var isEmpty: Bool {
+        return base.isEmpty
+    }
+    
+    /// - Returns: The axis-aligned bounding box for `Path`.
+    ///
+    /// - Warning: This uses a simplification technique for calculateing the bounding boxes of
+    /// quadratic and cubic Bézier curves, which may result in some inaccuracy for whacky curves.
+    ///
+    public var axisAlignedBoundingBox: Rectangle {
+        return base.map { $0.axisAlignedBoundingBox }.nonEmptySum ?? .zero
+    }
+    
+    
+
 
     // MARK: - Instance Methods
     
