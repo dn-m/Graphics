@@ -13,7 +13,7 @@ let package = Package(
 //        .library(name: "GraphicsTesting", targets: ["GraphicsTesting"])
     ],
     dependencies: [
-        .package(url: "https://github.com/drmohundro/SWXMLHash", from: "4.1.1"),
+//        .package(url: "https://github.com/drmohundro/SWXMLHash", from: "4.1.1"),
         .package(url: "https://github.com/dn-m/Math", from: "0.7.0"),
         .package(url: "https://github.com/dn-m/Structure", from: "0.23.0")
     ],
@@ -28,8 +28,8 @@ let package = Package(
 //        .target(name: "GraphicsTesting", dependencies: ["QuartzAdapter"]),
 
         // Tests
-        .testTarget(name: "GeometryTests", dependencies: ["Geometry"]),
-        .testTarget(name: "PathTests", dependencies: ["Path", "Rendering", "GraphicsTesting"]),
+//        .testTarget(name: "GeometryTests", dependencies: ["Geometry"]),
+//        .testTarget(name: "PathTests", dependencies: ["Path", "Rendering", "GraphicsTesting"]),
 //        .testTarget(name: "RenderingTests", dependencies: ["Rendering", "GraphicsTesting"]),
 //        .testTarget(name: "SVGTests", dependencies: ["SVG", "GraphicsTesting"]),
 //        .testTarget(name: "QuartzAdapterTests", dependencies: ["QuartzAdapter", "GraphicsTesting"])
