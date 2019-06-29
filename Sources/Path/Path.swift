@@ -10,12 +10,32 @@ import Algebra
 import DataStructures
 import Geometry
 
-public struct Path: CollectionWrapping
+public struct Path: Collection
 {
     
     public typealias Base = [BezierCurve]
     
     public let base: [BezierCurve]
+    
+    /// Start index.
+    public var startIndex: Base.Index {
+        return base.startIndex
+    }
+    
+    /// End index.
+    public var endIndex: Base.Index {
+        return base.endIndex
+    }
+    
+    /// Index after given index `i`.
+    public func index(after i: Base.Index) -> Base.Index {
+        return base.index(after: i)
+    }
+    
+    /// - returns: Element at the given `index`.
+    public subscript (index: Base.Index) -> Base.Element {
+        return base[index]
+    }
 }
 
 extension Path {
