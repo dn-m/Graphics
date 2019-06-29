@@ -7,7 +7,7 @@
 //
 
 import Algebra
-import DataStructures
+//import DataStructures
 import Geometry
 
 public struct Path {
@@ -87,7 +87,7 @@ public struct Path {
         let (most, last) = vertices.split(at: vertices.count - 1)!
         let merged = most.flatMap { $0.dropLast() } + last.first!
         if merged.count == 2 {
-            return Polygon(vertices: merged + merged.first!)
+            return Polygon(vertices: merged + [merged.first!])
         }
         return Polygon(vertices: merged)
     }
