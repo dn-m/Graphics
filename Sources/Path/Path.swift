@@ -13,7 +13,7 @@ import Geometry
 public struct Path: CollectionWrapping
 {
     
-    typealias Base = [BezierCurve]
+    public typealias Base = [BezierCurve]
     
     // MARK: - Instance Properties
     
@@ -46,7 +46,7 @@ public struct Path: CollectionWrapping
     }
     
     /// Create a `Path` with the given `curves`.
-    public init(_ curves: [BezierCurve]) {
+    public init(_ curves: Base) {
         self.base = curves
     }
     
