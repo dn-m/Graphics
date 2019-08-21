@@ -1,7 +1,7 @@
 # Graphics
 
-![Swift](https://img.shields.io/badge/Swift-4.2-brightgreen.svg)
-[![Build Status](https://travis-ci.org/dn-m/Graphics.svg?branch=master)](https://travis-ci.org/dn-m/Graphics)
+![Swift Version](https://img.shields.io/badge/Swift-5.0-orange.svg)
+[![Build Status](https://travis-ci.org/dn-m/Graphics.svg?branch=latest)](https://travis-ci.org/dn-m/Graphics)
 
 The `Graphics` package defines structures for graphically representing information, agnostic to the actual drawing API used.
 
