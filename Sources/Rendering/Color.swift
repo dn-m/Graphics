@@ -10,19 +10,23 @@ import Math
 
 /// Structure representing a color.
 public struct Color {
+    public let red: Double
+    public let green: Double
+    public let blue: Double
+    public let alpha: Double
 
-    /// The red, green, blue, and alpha components of this Color`.
-    public let components: Components
+    /// Create a `Color` with the given `red`, `green`, `blue`, and `alpha` values.
+    public init(red: Double, green: Double, blue: Double, alpha: Double = 1) {
+        self.red = red
+        self.green = green
+        self.blue = blue
+        self.alpha = alpha
+    }
 }
 
 extension Color {
 
     // MARK: - Initializers
-
-    /// Create a `Color` with the given `red`, `green`, `blue`, and `alpha` values.
-    public init(red: Double, green: Double, blue: Double, alpha: Double = 1) {
-        self.components = Components(red: red, green: green, blue: blue, alpha: alpha)
-    }
 
     /// Create a `Color` with the given `red`, `green`, `blue`, and `alpha` values in the range
     /// [0,255].
@@ -275,12 +279,10 @@ extension Color {
 extension Color: CustomStringConvertible {
 
     public var description: String {
-        var result = "("
-        result += "r: \(components.red), "
-        result += "g: \(components.green), "
-        result += "b: \(components.blue), "
-        result += "a: \(components.alpha)"
-        result += ")"
-        return result
+        return "(" +
+            zip(["r","g","b","a"],[red,green,blue,alpha])
+                .map { "\($0): \($1)" }
+                .joined(separator: ", ") +
+            ")"
     }
 }

@@ -16,12 +16,7 @@ extension Color {
     public var cgColor: CGColor {
         return CGColor(
             colorSpace: CGColorSpaceCreateDeviceRGB(),
-            components: [
-                CGFloat(components.red),
-                CGFloat(components.green),
-                CGFloat(components.blue),
-                CGFloat(components.alpha)
-            ]
+            components: [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)]
         )!
     }
 }
