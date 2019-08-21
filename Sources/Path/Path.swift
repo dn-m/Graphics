@@ -93,10 +93,34 @@ public struct Path {
     }
 }
 
-extension Path: CollectionWrapping {
+extension Path: Collection {
+
+    // MARK: - Collection
+
+    public typealias Base = [BezierCurve]
 
     public var base: [BezierCurve] {
         return curves
+    }
+
+    /// Start index.
+    public var startIndex: Base.Index {
+        return base.startIndex
+    }
+
+    /// End index.
+    public var endIndex: Base.Index {
+        return base.endIndex
+    }
+
+    /// Index after given index `i`.
+    public func index(after i: Base.Index) -> Base.Index {
+        return base.index(after: i)
+    }
+
+    /// - returns: Element at the given `index`.
+    public subscript (index: Base.Index) -> Base.Element {
+        return base[index]
     }
 }
 
