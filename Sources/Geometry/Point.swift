@@ -145,3 +145,5 @@ extension Point: CustomStringConvertible {
         return "(\(x), \(y))"
     }
 }
+
+extension Point: Codable { }

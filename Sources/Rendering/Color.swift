@@ -286,3 +286,5 @@ extension Color: CustomStringConvertible {
             ")"
     }
 }
+
+extension Color: Codable { }
