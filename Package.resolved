@@ -5,9 +5,9 @@
         "package": "Math",
         "repositoryURL": "https://github.com/dn-m/Math",
         "state": {
-          "branch": "swift-5",
-          "revision": "4096d7d5a33f43c6e7b393926ba82d799050e365",
-          "version": null
+          "branch": null,
+          "revision": "519c7e3128e80fbfd43d7cc0c0947b86d423db8a",
+          "version": "0.8.0"
         }
       },
       {
@@ -15,17 +15,17 @@
         "repositoryURL": "https://github.com/dn-m/PerformanceTesting",
         "state": {
           "branch": null,
-          "revision": "d48417c837b1a029dd9567dfa7b5ee3cfa9a0ec7",
-          "version": "0.3.0"
+          "revision": "7c73a60c4b69b981ac3dd4015cc26cea0e45c8c7",
+          "version": "0.4.0"
         }
       },
       {
         "package": "Structure",
         "repositoryURL": "https://github.com/dn-m/Structure",
         "state": {
-          "branch": "swift-5",
-          "revision": "8f67514cba950f60ee992a8d0996d4f11d9654b0",
-          "version": null
+          "branch": null,
+          "revision": "943f06106dfcff9d0360f35866601846895d212f",
+          "version": "0.24.1"
         }
       },
       {
