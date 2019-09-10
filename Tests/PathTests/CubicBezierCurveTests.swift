@@ -14,6 +14,7 @@ import GraphicsTesting
 
 class CubicBezierCurveTests: XCTestCase {
 
+    #if os(macOS)
     override func setUp() {
         createArtifactsDirectory(for: "\(type(of: self))")
     }
@@ -21,6 +22,7 @@ class CubicBezierCurveTests: XCTestCase {
     override func tearDown() {
         openArtifactsDirectory()
     }
+    #endif
     
     func testUpAndDown() {
 
@@ -168,7 +170,10 @@ class CubicBezierCurveTests: XCTestCase {
             .leaf(.path(styledPathA)),
             .leaf(.path(styledPathB))
         ])
+
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBoundingBoxRender() {
@@ -198,7 +203,9 @@ class CubicBezierCurveTests: XCTestCase {
             .leaf(.path(styledBox)),
             .leaf(.path(styledCurve))
         ])
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testTranslatedByRender() {
@@ -228,7 +235,9 @@ class CubicBezierCurveTests: XCTestCase {
             .leaf(.path(styledCurve)),
             .leaf(.path(styledTranslated))
         ])
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testSimplifiedRender() {
@@ -256,7 +265,9 @@ class CubicBezierCurveTests: XCTestCase {
             .leaf(.path(styledCurve)),
             .leaf(.path(styledSimplified))
         ])
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testScaledRender() {
@@ -289,7 +300,9 @@ class CubicBezierCurveTests: XCTestCase {
             .leaf(.path(styledScaled)),
             .leaf(.path(styledDot))
         ])
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testRotatedRender() {
@@ -322,7 +335,9 @@ class CubicBezierCurveTests: XCTestCase {
             .leaf(.path(styledRotated)),
             .leaf(.path(styledDot))
         ])
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 }
 

@@ -14,6 +14,7 @@ import GraphicsTesting
 
 class QuadraticBezierCurveTests: XCTestCase {
 
+    #if os(macOS)
     override func setUp() {
         createArtifactsDirectory(for: "\(type(of: self))")
     }
@@ -21,6 +22,7 @@ class QuadraticBezierCurveTests: XCTestCase {
     override func tearDown() {
         openArtifactsDirectory()
     }
+    #endif
     
     // MARK: - Quadratic
 
@@ -79,7 +81,9 @@ class QuadraticBezierCurveTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBezierCurveTsAtY() {
@@ -136,7 +140,9 @@ class QuadraticBezierCurveTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBezierCurveXsAtY() {
@@ -184,6 +190,8 @@ class QuadraticBezierCurveTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 }
