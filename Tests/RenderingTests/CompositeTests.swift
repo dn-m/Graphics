@@ -18,6 +18,7 @@ import QuartzCore
 
 class CompositeTests: XCTestCase {
 
+    #if os(macOS)
     override func setUp() {
         createArtifactsDirectory(for: "\(type(of: self))")
     }
@@ -25,6 +26,7 @@ class CompositeTests: XCTestCase {
     override func tearDown() {
         openArtifactsDirectory()
     }
+    #endif
 
     func testTranslateLeaf() {
         let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
@@ -109,6 +111,8 @@ class CompositeTests: XCTestCase {
 
         XCTAssertEqual(bbox, expected)
     }
+
+    #if os(macOS)
 
     func testResizedToFitContentsLeafNoChange() {
         let rect = Rectangle(width: 10, height: 10)
@@ -341,4 +345,6 @@ class CompositeTests: XCTestCase {
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
     }
+
+    #endif
 }
