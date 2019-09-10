@@ -6,11 +6,10 @@
 //
 
 #if os(OSX)
-import QuartzCore
-import QuartzAdapter
-#endif
 
 import Foundation
+import QuartzCore
+import QuartzAdapter
 import Rendering
 
 /// The URL of the directory where the graphics test artifacts of all tests will be generated.
@@ -55,15 +54,11 @@ public func render(
     fileName: String,
     testCaseName: String
 ) {
-    #if os(OSX)
     do {
         try composite.renderToPDF(at: location(forFile: fileName + ".pdf", in: testCaseName))
     } catch {
         print(error)
     }
-    #else
-    print("PDF rendering tests only supported on macOS")
-    #endif
 }
 
 /// Runs the given bash `args`.
@@ -75,3 +70,5 @@ private func shell(_ args: String...) -> Int32 {
     task.waitUntilExit()
     return task.terminationStatus
 }
+
+#endif

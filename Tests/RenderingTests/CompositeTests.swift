@@ -18,6 +18,7 @@ import QuartzCore
 
 class CompositeTests: XCTestCase {
 
+    #if os(macOS)
     override func setUp() {
         createArtifactsDirectory(for: "\(type(of: self))")
     }
@@ -25,6 +26,7 @@ class CompositeTests: XCTestCase {
     override func tearDown() {
         openArtifactsDirectory()
     }
+    #endif
 
     func testTranslateLeaf() {
         let frame = Rectangle(x: 10, y: 10, width: 100, height: 100)
@@ -117,8 +119,10 @@ class CompositeTests: XCTestCase {
         let composite = StyledPath.Composite.leaf(.path(styled))
         let resized = composite.resizedToFitContents
         XCTAssertEqual(resized.frame, rect)
+        #if os(macOS)
         render(composite, fileName: "\(#function)_before", testCaseName: "\(type(of: self))")
         render(resized, fileName: "\(#function)_after", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testResizedToFitContentsLeafNoTranslation() {
@@ -128,8 +132,10 @@ class CompositeTests: XCTestCase {
         let composite = StyledPath.Composite.leaf(.path(renderedPath))
         let resized = composite.resizedToFitContents
         XCTAssertEqual(resized.frame, rect)
+        #if os(macOS)
         render(composite, fileName: "\(#function)_before", testCaseName: "\(type(of: self))")
         render(resized, fileName: "\(#function)_after", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testResizedToFitContentsLeafScaleAndTranslation() {
@@ -140,8 +146,10 @@ class CompositeTests: XCTestCase {
         let resized = composite.resizedToFitContents
         let expected = Rectangle(x: 5, y: 5, width: 10, height: 10)
         XCTAssertEqual(resized.frame, expected)
+        #if os(macOS)
         render(composite, fileName: "\(#function)_before", testCaseName: "\(type(of: self))")
         render(resized, fileName: "\(#function)_after", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testResizedToFitContentsBranchScaleAndTranslation() {
@@ -175,8 +183,10 @@ class CompositeTests: XCTestCase {
         let resized = composite.resizedToFitContents
         let expected = Rectangle(x: 2, y: 2, width: 22, height: 22)
         XCTAssertEqual(resized.frame, expected)
+        #if os(macOS)
         render(composite, fileName: "\(#function)_before", testCaseName: "\(type(of: self))")
         render(resized, fileName: "\(#function)_after", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testResizedToFitContentsBranchScaleAndTranslation2() {
@@ -210,8 +220,10 @@ class CompositeTests: XCTestCase {
         let resized = composite.resizedToFitContents
         let expected = Rectangle(x: 0, y: 0, width: 30, height: 30)
         XCTAssertEqual(resized.frame, expected)
+        #if os(macOS)
         render(composite, fileName: "\(#function)_before", testCaseName: "\(type(of: self))")
         render(resized, fileName: "\(#function)_after", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBezierCurveTopLeftBottomRightEaseInEaseOut() {
@@ -230,7 +242,9 @@ class CompositeTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))])
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBezierCurveBottomLeftTopRightEaseInEaseOut() {
@@ -249,7 +263,9 @@ class CompositeTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))])
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBezierCurveRedDotsLinearT() {
@@ -278,7 +294,9 @@ class CompositeTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBezierCurveRedDotsLinearX() {
@@ -308,7 +326,9 @@ class CompositeTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 
     func testBezierCurveRedDotsLinearY() {
@@ -339,6 +359,8 @@ class CompositeTests: XCTestCase {
             styling: Styling(stroke: Stroke(color: .black))
         )
         let composite: StyledPath.Composite = .branch(group, [.leaf(.path(styledPath))] + dots)
+        #if os(macOS)
         render(composite, fileName: "\(#function)", testCaseName: "\(type(of: self))")
+        #endif
     }
 }
